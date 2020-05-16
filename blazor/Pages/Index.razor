@@ -1,5 +1,30 @@
 ﻿@page "/"
+@using blazor.Components
+@using blazor.State
+@inject AppState AppState
+@implements IDisposable
+
+
+
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+<Counter />
+
+@AppState.SelectedNumber
+
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+
+}
