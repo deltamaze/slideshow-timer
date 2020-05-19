@@ -7,6 +7,7 @@
 <p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button class="btn btn-primary" @onclick="TestTimer">Click me</button>
 
 @code {
     int currentCount = 0;
@@ -15,5 +16,10 @@
     {
         currentCount += 1;
         AppState.SetNumber(currentCount+1);
+    }
+    void TestTimer()
+    {
+        AppState.AppTimer.SetTimer(0,2,30);
+        AppState.AppTimer.StartTimer();
     }
 }
