@@ -1,6 +1,6 @@
 ﻿@page "/"
 @using blazor.Components
-@using blazor.State
+@using blazor.Store
 @inject AppState AppState
 @implements IDisposable
 
@@ -10,6 +10,7 @@
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+<TimerService />
 <Counter />
 
 @AppState.SelectedNumber
@@ -23,7 +24,6 @@ Welcome to your new app.
     protected override void OnInitialized()
     {
         AppState.OnChange += StateHasChanged;
-        AppState.Context = AppContext
     }
 
     public void Dispose()

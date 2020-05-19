@@ -19,9 +19,10 @@ namespace blazor.Entities
 
         private  System.Timers.Timer sysTimer;
         private Action OnChangeCallback;
-
+        public event Action TimerTickNotifier;
         
 
+        
         public Timer(Action callerOnChange)
         {
             // pass reference from the user of this class
@@ -50,7 +51,11 @@ namespace blazor.Entities
         }
         public void StartTimer()
         {
-            sysTimer.Start();
+            //only start if component is listening to changes
+            if (TimerTickNotifier != null)
+            {
+                sysTimer.Start();
+            }
         }
         public void PauseTimer()
         {
@@ -66,20 +71,13 @@ namespace blazor.Entities
             OnChangeCallback.Invoke();
 
         }
-        #endregion
-
-        #region private methods
-        private void NotifyChange()
-        {
-            OnChangeCallback.Invoke();
-        }
-        private void OnTimedEvent(Object source, ElapsedEventArgs e)
+        public void DecrementTimer()
         {
             if (CurrentSecond != 0)
             {
                 CurrentSecond -= 1;
-            } 
-            else if ( CurrentMinute != 0)
+            }
+            else if (CurrentMinute != 0)
             {
                 CurrentMinute -= 1;
                 CurrentSecond = 59;
@@ -95,10 +93,14 @@ namespace blazor.Entities
                 TimerFinished = true;
                 PauseTimer();
             }
-            OnChangeCallback.BeginInvoke(null, null);
+            OnChangeCallback.Invoke();
+        }
+        #endregion
 
-            // OnChangeCallback.Invoke();
-            //this.BeginInvoke(new InvokeDelegate(NotifyChange()));
+        #region private methods
+        private void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            TimerTickNotifier?.Invoke(); 
         }
         #endregion
     }

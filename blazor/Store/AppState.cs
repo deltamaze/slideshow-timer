@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using blazor.Entities;
 
-namespace blazor.State
+namespace blazor.Store
 {
     public class AppState
     {
