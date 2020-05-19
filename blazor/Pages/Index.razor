@@ -23,6 +23,7 @@ Welcome to your new app.
     protected override void OnInitialized()
     {
         AppState.OnChange += StateHasChanged;
+        AppState.Context = AppContext
     }
 
     public void Dispose()

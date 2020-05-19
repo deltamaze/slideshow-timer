@@ -16,18 +16,15 @@ namespace blazor.State
         public event Action OnChange;
         public Timer AppTimer;
 
-        private ISynchronizeInvoke synchronizingObject;
-
-        public ISynchronizeInvoke SynchronizingObject
-        //Property to get or set the object to Sync up against.
+        private readonly System.Threading.SynchronizationContext context;
+        public System.Threading.SynchronizationContext Context
         {
-            get { return this.synchronizingObject; }
-            set { this.synchronizingObject = value; }
+            get { return this.context; }
         }
 
         public AppState()
         {
-            AppTimer = new Timer(NotifyStateChanged, SynchronizingObject);
+            AppTimer = new Timer(NotifyStateChanged);
         }
         public void SetNumber(int newNumber)
         {
@@ -43,6 +40,7 @@ namespace blazor.State
 
         }
         private void NotifyStateChanged() => OnChange?.Invoke();
+        
     }
 }
 

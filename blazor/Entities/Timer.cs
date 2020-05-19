@@ -22,14 +22,13 @@ namespace blazor.Entities
 
         
 
-        public Timer(Action callerOnChange, ISynchronizeInvoke SynchronizingObject)
+        public Timer(Action callerOnChange)
         {
             // pass reference from the user of this class
             OnChangeCallback = callerOnChange;
 
             // Create a timer with a one second interval.
             sysTimer = new System.Timers.Timer(100);
-            sysTimer.SynchronizingObject = SynchronizingObject;
             sysTimer.Elapsed += OnTimedEvent;
             sysTimer.AutoReset = true;
             // initial values
@@ -96,17 +95,7 @@ namespace blazor.Entities
                 TimerFinished = true;
                 PauseTimer();
             }
-
-
-            //SynchronizingObject is not null and the Synchronizing
-            //Object Requires and invokation...
-            if ((this.sysTimer.SynchronizingObject != null) &&
-                          this.sysTimer.SynchronizingObject.InvokeRequired)
-                this.sysTimer.SynchronizingObject.BeginInvoke(OnChangeCallback,
-                                         new object[] { this, e });
-            //Get the Synchronizing Object to invoke the event...
-            else
-                OnChangeCallback.Invoke(); //Fire the event
+            OnChangeCallback.BeginInvoke(null, null);
 
             // OnChangeCallback.Invoke();
             //this.BeginInvoke(new InvokeDelegate(NotifyChange()));
