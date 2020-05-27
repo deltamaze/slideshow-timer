@@ -15,6 +15,7 @@ namespace blazor.Store
 
         public event Action OnChange;
         public Timer AppTimer;
+        public Stopwatch AppStopwatch;
 
         private readonly System.Threading.SynchronizationContext context;
         public System.Threading.SynchronizationContext Context
@@ -25,6 +26,7 @@ namespace blazor.Store
         public AppState()
         {
             AppTimer = new Timer(NotifyStateChanged);
+            AppStopwatch = new Stopwatch(NotifyStateChanged);
         }
         public void SetNumber(int newNumber)
         {

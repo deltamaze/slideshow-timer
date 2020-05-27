@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace blazor.Entities
@@ -17,8 +13,8 @@ namespace blazor.Entities
         public int CurrentSecond { get; private set; }
         public bool TimerFinished { get; private set; }
 
-        private  System.Timers.Timer sysTimer;
-        private Action OnChangeCallback;
+        private readonly System.Timers.Timer sysTimer;
+        private readonly Action OnChangeCallback;
         public event Action TimerTickNotifier;
         
 

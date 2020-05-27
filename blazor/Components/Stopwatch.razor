@@ -1,0 +1,37 @@
+﻿@namespace blazor.Components
+@using blazor.Store
+@inject AppState AppState
+@implements IDisposable
+
+
+
+<p>
+    @String.Format("{0}:{1}:{2}", AppState.AppStopwatch.CurrentHour, AppState.AppStopwatch.CurrentMinute, AppState.AppStopwatch.CurrentSecond)
+</p>
+@* Todo: break out into two buttons, one for start/pause and show depending on running status *@
+<button class="btn btn-primary" @onclick="StartPause">Start / Pause</button>
+
+<button class="btn btn-primary" @onclick="ResetStopwatch">Reset</button>
+
+@code {
+
+
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+
+    void StartPause()
+    {
+        AppState.AppStopwatch.StartStopwatch();
+    }
+    void ResetStopwatch()
+    {
+        AppState.AppStopwatch.ResetStopwatch();
+    }
+}
