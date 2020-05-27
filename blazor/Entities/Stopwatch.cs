@@ -1,8 +1,8 @@
-﻿using System;
-using System.Timers;
-
-namespace blazor.Entities
+﻿namespace blazor.Entities
 {
+    using System;
+    using System.Timers;
+
     public class Stopwatch
     {
         public int CurrentHour { get; private set; }
@@ -10,13 +10,13 @@ namespace blazor.Entities
         public int CurrentSecond { get; private set; }
 
         private readonly System.Timers.Timer sysTimer;
-        private readonly Action OnChangeCallback;
+        private readonly Action onChangeCallback;
         public event Action TimerTickNotifier;
 
         public Stopwatch(Action callerOnChange)
         {
             // pass reference from the user of this class
-            OnChangeCallback = callerOnChange;
+            onChangeCallback = callerOnChange;
 
             // Create a timer with a one second interval.
             sysTimer = new System.Timers.Timer(100);
@@ -25,18 +25,21 @@ namespace blazor.Entities
             // initial values
             ResetStopwatch();
         }
+
         public void StartStopwatch()
         {
-            //only start if component is listening to changes
+            // only start if component is listening to changes
             if (TimerTickNotifier != null)
             {
                 sysTimer.Start();
             }
         }
+
         public void PauseStopwatch()
         {
             sysTimer.Stop();
         }
+
         public void ResetStopwatch()
         {
             PauseStopwatch();
@@ -44,9 +47,9 @@ namespace blazor.Entities
             CurrentMinute = 0;
             CurrentSecond = 0;
 
-            OnChangeCallback.Invoke();
-
+            onChangeCallback.Invoke();
         }
+
         public void IncrementStopwatch()
         {
             if (CurrentSecond != 59)
@@ -64,16 +67,13 @@ namespace blazor.Entities
                 CurrentMinute = 0;
                 CurrentMinute = 0;
             }
-            OnChangeCallback.Invoke();
+
+            onChangeCallback.Invoke();
         }
 
-
-        #region private methods
-        private void OnTimedEvent(Object source, ElapsedEventArgs e)
+        private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             TimerTickNotifier?.Invoke();
         }
-        #endregion
-
     }
 }

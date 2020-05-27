@@ -10,40 +10,25 @@ namespace blazor.Store
     public class AppState
     {
         public int SelectedNumber { get; private set; }
-        
+
         public int StopWatchTime { get; private set; }
 
         public event Action OnChange;
         public Timer AppTimer;
         public Stopwatch AppStopwatch;
 
-        private readonly System.Threading.SynchronizationContext context;
-        public System.Threading.SynchronizationContext Context
-        {
-            get { return this.context; }
-        }
-
         public AppState()
         {
             AppTimer = new Timer(NotifyStateChanged);
             AppStopwatch = new Stopwatch(NotifyStateChanged);
         }
+
         public void SetNumber(int newNumber)
         {
             SelectedNumber = newNumber;
             NotifyStateChanged();
         }
-        public void StopTimer()
-        {
 
-        }
-        public void ResetTimer()
-        {
-
-        }
         private void NotifyStateChanged() => OnChange?.Invoke();
-        
     }
 }
-
-

@@ -14,15 +14,13 @@ namespace blazor.Entities
         public bool TimerFinished { get; private set; }
 
         private readonly System.Timers.Timer sysTimer;
-        private readonly Action OnChangeCallback;
+        private readonly Action onChangeCallback;
         public event Action TimerTickNotifier;
-        
 
-        
         public Timer(Action callerOnChange)
         {
             // pass reference from the user of this class
-            OnChangeCallback = callerOnChange;
+            onChangeCallback = callerOnChange;
 
             // Create a timer with a one second interval.
             sysTimer = new System.Timers.Timer(100);
@@ -35,7 +33,7 @@ namespace blazor.Entities
             StartingSecond = 0;
             ResetTimer();
         }
-        #region public methods
+
         public void SetTimer(int hour, int minute, int second)
         {
             StartingHour = hour;
@@ -43,20 +41,23 @@ namespace blazor.Entities
             StartingSecond = second;
             ResetTimer();
 
-            OnChangeCallback.Invoke();
+            onChangeCallback.Invoke();
         }
+
         public void StartTimer()
         {
-            //only start if component is listening to changes
+            // only start if component is listening to changes
             if (TimerTickNotifier != null)
             {
                 sysTimer.Start();
             }
         }
+
         public void PauseTimer()
         {
             sysTimer.Stop();
         }
+
         public void ResetTimer()
         {
             PauseTimer();
@@ -64,9 +65,9 @@ namespace blazor.Entities
             CurrentMinute = StartingMinute;
             CurrentSecond = StartingSecond;
 
-            OnChangeCallback.Invoke();
-
+            onChangeCallback.Invoke();
         }
+
         public void DecrementTimer()
         {
             if (CurrentSecond != 0)
@@ -89,15 +90,13 @@ namespace blazor.Entities
                 TimerFinished = true;
                 PauseTimer();
             }
-            OnChangeCallback.Invoke();
-        }
-        #endregion
 
-        #region private methods
-        private void OnTimedEvent(Object source, ElapsedEventArgs e)
-        {
-            TimerTickNotifier?.Invoke(); 
+            onChangeCallback.Invoke();
         }
-        #endregion
+
+        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            TimerTickNotifier?.Invoke();
+        }
     }
 }

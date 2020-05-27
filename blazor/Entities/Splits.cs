@@ -7,7 +7,5 @@ namespace blazor.Entities
 {
     public class Splits
     {
-   
-
     }
 }
