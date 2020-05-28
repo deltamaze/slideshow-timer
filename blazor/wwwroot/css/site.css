@@ -3,9 +3,40 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: black;
+    font-weight: 400;
+    line-height: 1.5;
+    /*color: #212529;*/
+    color: #FFFFFF;
+    text-align: left;
+    margin:0px;
 }
 
+.btn-primary {
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #FFFFFF;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 300;
+    color: #FFFFFF;
+    background-color: transparent;
+    text-align: center;
+    transition: all 0.5s;
+}
 
+    .btn-primary:hover {
+        color: #000000;
+        background-color: #FFFFFF;
+    }
+
+@media all and (max-width:30em) {
+      .btn-primary {
+        display: block;
+        margin: 0.4em auto;
+    }
+}
 
 #appContents {
     height: 100vh;
@@ -35,6 +66,27 @@ html, body {
         margin-right: -50%;
         transform: translate(-50%, -50%)
     }
+
+.stopwatchButtons {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    top: 8em;
+    width: 16em;
+}
+
+.stopwatchLeftButon {
+    position: relative;
+    float: left;
+}
+
+.stopwatchRightButon {
+    position: relative;
+    float: right;
+}
 
 #appFooter {
     background: red; /*enabled for visualisation*/

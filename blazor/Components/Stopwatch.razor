@@ -10,9 +10,12 @@
     @FormatDisplayTime()
 </p>
 @* Todo: break out into two buttons, one for start/pause and show depending on running status *@
-<button class="btn btn-primary" @onclick="StartPause">Start / Pause</button>
+<div class="stopwatchButtons">
+    <button class="btn-primary stopwatchLeftButon" @onclick="StartPause">Start / Pause</button>
 
-<button class="btn btn-primary" @onclick="ResetStopwatch">Reset</button>
+    <button class="btn-primary stopwatchRightButon" @onclick="ResetStopwatch">Reset</button>
+</div>
+
 
 @code {
 
