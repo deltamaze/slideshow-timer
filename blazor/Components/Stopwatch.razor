@@ -1,4 +1,5 @@
 ﻿@namespace blazor.Components
+@using System.Text;
 @using blazor.Store
 @inject AppState AppState
 @implements IDisposable
@@ -6,7 +7,7 @@
 
 
 <p>
-    @String.Format("{0}:{1}:{2}", AppState.AppStopwatch.CurrentHour, AppState.AppStopwatch.CurrentMinute, AppState.AppStopwatch.CurrentSecond)
+    @FormatDisplayTime()
 </p>
 @* Todo: break out into two buttons, one for start/pause and show depending on running status *@
 <button class="btn btn-primary" @onclick="StartPause">Start / Pause</button>
@@ -34,4 +35,15 @@
     {
         AppState.AppStopwatch.ResetStopwatch();
     }
+    string FormatDisplayTime()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendFormat("{0:D2}:", AppState.AppStopwatch.CurrentHour);
+        sb.AppendFormat("{0:D2}:", AppState.AppStopwatch.CurrentMinute);
+        sb.AppendFormat("{0:D2}", AppState.AppStopwatch.CurrentSecond);
+
+        return sb.ToString();
+
+    }
+
 }

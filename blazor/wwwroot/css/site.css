@@ -5,29 +5,51 @@ html, body {
     background-color: black;
 }
 
-.content {
-    
+
+
+#appContents {
+    height: 100vh;
+    position: relative;
 }
-.center {
+
+#appBody {
+    padding: 10px;
+    padding-bottom: 60px; /* Height of the footer */
+}
+
+#appCenter {
     position: absolute;
     width: 100px;
     height: 50px;
-    top: 50%;
+    top: 30%;
     left: 50%;
-    margin-left: -50px; /* margin is -0.5 * dimension */
-    margin-top: -25px;
+    /*margin-left: -50px; 
+    margin-top: -25px;*/
+    font-size: 8em;
+    margin: 0;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }
 
-​
-.footer {
-    /*background: red; enabled for visualisation*/
-    position: fixed;
+    #appCenter p {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+    }
+
+#appFooter {
+    background: red; /*enabled for visualisation*/
+    position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    height: 50px;
+    height: 60px; /* Height of the footer */
 }
-.footerActions {
+
+#appFooterActions {
     position: relative;
     float: right;
     padding-right: 50px;
