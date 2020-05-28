@@ -19,19 +19,15 @@ html, body {
 
 #appCenter {
     position: absolute;
-    width: 100px;
     height: 50px;
     top: 30%;
     left: 50%;
-    /*margin-left: -50px; 
-    margin-top: -25px;*/
-    font-size: 8em;
     margin: 0;
-    margin-right: -50%;
     transform: translate(-50%, -50%)
 }
 
     #appCenter p {
+        font-size: 8em;
         margin: 0;
         position: absolute;
         top: 50%;
