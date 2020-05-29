@@ -103,7 +103,7 @@ html, body {
     padding-right: 50px;
 }
 /*modal css below*/
-/* review https://gist.github.com/CodeMyUI/60aa0f3b1e8589bb5bff */
+/* modal derived from: https://gist.github.com/CodeMyUI/60aa0f3b1e8589bb5bff */
 html.modal-active, body.modal-active {
     overflow: hidden;
 }
@@ -167,6 +167,10 @@ html.modal-active, body.modal-active {
             #modal-container .modal-background .modal p {
                 font-size: 18px;
                 line-height: 22px;
+            }
+            #modal-container .modal-background .modal button {
+                line-height: 22px;
+                color:black;
             }
 
             #modal-container .modal-background .modal .modal-svg {
