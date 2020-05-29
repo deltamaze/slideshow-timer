@@ -9,6 +9,7 @@ html, body {
     color: #FFFFFF;
     text-align: left;
     margin:0px;
+
 }
 
 .btn-primary {
@@ -102,3 +103,93 @@ html, body {
     float: right;
     padding-right: 50px;
 }
+/*modal css below*/
+/* review https://gist.github.com/CodeMyUI/60aa0f3b1e8589bb5bff */
+
+#modal-container {
+    position: fixed;
+    display: table;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    z-index: 1;
+    transform: scaleY(.01) scaleX(0);
+    animation: unfoldIn 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+    transform: scale(0);
+    animation: zoomIn .5s .8s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+}
+    #modal-container .modal-background .modal 
+    {
+        transform: scale(0);
+        animation: zoomIn .5s .8s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+    }
+    #modal-container .out {
+        transform: scale(1);
+        animation: unfoldOut 1s .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+
+    }
+        #modal-container .out .modal-background .modal {
+            animation: zoomOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+        }
+
+.modal-background {
+    display: table-cell;
+    background: rgba(0,0,0,.8);
+    text-align: center;
+    vertical-align: middle;
+}
+
+    .modal-background .modal {
+        background: white;
+        padding: 50px;
+        display: inline-block;
+        border-radius: 3px;
+        font-weight: 300;
+        position: relative;
+    }
+
+.modal-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+}
+rect {
+    stroke: #fff;
+    stroke-width: 2px;
+    stroke-dasharray: 778;
+    stroke-dashoffset: 778;
+}
+
+@keyframes unfoldIn {
+    0% {
+            transform: scaleY(.005) scaleX(0);
+        }
+
+        50% {
+            transform: scaleY(.005) scaleX(1);
+        }
+
+        100% {
+            transform: scaleY(1) scaleX(1);
+        }
+    }
+
+    @keyframes unfoldOut {
+        0% {
+            transform: scaleY(1) scaleX(1);
+        }
+
+        50% {
+            transform: scaleY(.005) scaleX(1);
+        }
+
+        100% {
+            transform: scaleY(.005) scaleX(0);
+        }
+    }
+

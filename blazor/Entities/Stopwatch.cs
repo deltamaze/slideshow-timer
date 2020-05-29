@@ -50,6 +50,11 @@
             onChangeCallback.Invoke();
         }
 
+        public bool IsRunning()
+        {
+            return sysTimer.Enabled;
+        }
+
         public void IncrementStopwatch()
         {
             if (CurrentSecond != 59)
