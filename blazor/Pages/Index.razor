@@ -9,8 +9,8 @@
 
 <TimerService />
 <StopwatchService/>
-<div id="modal-container" class="@modalContentClass">
-    <div class="modal-background">
+<div id="modalContents" class="@modalContentsClass">
+    <div class="modalBackground">
         <div class="modal">
             <h2>I'm a Modal</h2>
             <p>Hear me roar.</p>
@@ -41,7 +41,7 @@
 @code {
 
     string contentClass = "";
-    string modalContentClass = "";
+    string modalContentsClass = "";
 
     protected override void OnInitialized()
     {
@@ -56,12 +56,12 @@
     void ShowSettings()
     {
         contentClass = "modal-active";
-        modalContentClass = "one";
+        modalContentsClass = "one";
     }
     void HideSettings()
     {
         contentClass = ""; // contentClass.Replace("modal-active","");
-        modalContentClass += " out";
+        modalContentsClass += " out";
     }
 
 }

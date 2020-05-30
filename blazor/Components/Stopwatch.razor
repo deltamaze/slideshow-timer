@@ -11,9 +11,9 @@
 </p>
 @* Todo: break out into two buttons, one for start/pause and show depending on running status *@
 <div class="stopwatchButtons">
-    <button class="btn-primary stopwatchLeftButon" @onclick="StartPause">@FormatStartPauseText()</button>
-
-    <button class="btn-primary stopwatchRightButon" @onclick="ResetStopwatch">Reset</button>
+    @*<button class="btn-primary stopwatchLeftButon" @onclick="StartPause">@FormatStartPauseText()</button>*@
+    <PrimaryButton AdditionalCss="stopwatchLeftButon" OnClickCallback="StartPause">@FormatStartPauseText()</PrimaryButton>
+    <PrimaryButton AdditionalCss="stopwatchRightButon" OnClickCallback="ResetStopwatch">Reset</PrimaryButton>
 </div>
 
 

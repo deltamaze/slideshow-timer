@@ -2,7 +2,7 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: navajowhite;
+    background-color: black;
     font-weight: 400;
     line-height: 1.5;
     /*color: #212529;*/
@@ -111,7 +111,7 @@ html.modal-active, body.modal-active {
     overflow: hidden;
 }
 
-#modal-container {
+#modalContents {
     position: fixed;
     display: table;
     height: 100%;
@@ -123,33 +123,33 @@ html.modal-active, body.modal-active {
     color:black;
 }
 
-    #modal-container.one {
+    #modalContents.one {
         transform: scaleY(0.01) scaleX(0);
         animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
     }
 
-        #modal-container.one .modal-background .modal {
+        #modalContents.one .modalBackground .modal {
             transform: scale(0);
             animation: zoomIn 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
         }
 
-        #modal-container.one.out {
+        #modalContents.one.out {
             transform: scale(1);
             animation: unfoldOut 1s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
         }
 
-            #modal-container.one.out .modal-background .modal {
+            #modalContents.one.out .modalBackground .modal {
                 animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
             }
 
-    #modal-container .modal-background {
+    #modalContents .modalBackground {
         display: table-cell;
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(255,255, 255, 0.4);
         text-align: center;
         vertical-align: middle;
     }
 
-        #modal-container .modal-background .modal {
+        #modalContents .modalBackground .modal {
             background: white;
             padding: 50px;
             display: inline-block;
@@ -158,22 +158,22 @@ html.modal-active, body.modal-active {
             position: relative;
         }
 
-            #modal-container .modal-background .modal h2 {
+            #modalContents .modalBackground .modal h2 {
                 font-size: 25px;
                 line-height: 25px;
                 margin-bottom: 15px;
             }
 
-            #modal-container .modal-background .modal p {
+            #modalContents .modalBackground .modal p {
                 font-size: 18px;
                 line-height: 22px;
             }
-            #modal-container .modal-background .modal button {
+            #modalContents .modalBackground .modal button {
                 line-height: 22px;
                 color:black;
             }
 
-            #modal-container .modal-background .modal .modal-svg {
+            #modalContents .modalBackground .modal .modal-svg {
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -182,7 +182,7 @@ html.modal-active, body.modal-active {
                 border-radius: 3px;
             }
 
-                #modal-container .modal-background .modal .modal-svg rect {
+                #modalContents .modalBackground .modal .modal-svg rect {
                     stroke: #fff;
                     stroke-width: 2px;
                     stroke-dasharray: 778;
