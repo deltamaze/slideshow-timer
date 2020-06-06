@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Timers;
 
-namespace blazor.Entities
+namespace blazor.Store
 {
-    public class Timer : RenderEntity
+    public class TimerState : RenderEntity
     {
         public int StartingHour { get; private set; }
         public int StartingMinute { get; private set; }
@@ -16,7 +16,7 @@ namespace blazor.Entities
         private readonly System.Timers.Timer sysTimer;
         public event Action TimerTickNotifier;
 
-        public Timer(Action callerOnChange) : base(callerOnChange)
+        public TimerState(Action callerOnChange) : base(callerOnChange)
         {
             // Create a timer with a one second interval.
             sysTimer = new System.Timers.Timer(100);

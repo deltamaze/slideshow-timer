@@ -1,0 +1,21 @@
+﻿@namespace blazor.Components
+@using blazor.Store
+@inject AppState AppState
+@implements IDisposable
+
+<Stopwatch />
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+
+
+}

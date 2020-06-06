@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using blazor.Entities;
+using blazor.Models;
 
 namespace blazor.Store
 {
     public class AppState
     {
         public event Action OnChange;
-        public Timer AppTimer;
-        public Stopwatch AppStopwatch;
-        public Modal AppModal;
-        public SelectedView AppView;
+        public TimerState AppTimer;
+        public StopwatchState AppStopwatch;
+        public ModalState AppModal;
+        public ViewOptionEnum AppView;
 
         public AppState()
         {
-            AppTimer = new Timer(NotifyStateChanged);
-            AppStopwatch = new Stopwatch(NotifyStateChanged);
-            AppModal = new Modal(NotifyStateChanged);
-            AppView = SelectedView.Stopwatch; // default view
+            AppTimer = new TimerState(NotifyStateChanged);
+            AppStopwatch = new StopwatchState(NotifyStateChanged);
+            AppModal = new ModalState(NotifyStateChanged);
+            AppView = ViewOptionEnum.Stopwatch; // default view
         }
 
-        public void UpdateView(SelectedView newView)
+        public void UpdateView(ViewOptionEnum newView)
         {
             AppView = newView;
             NotifyStateChanged();

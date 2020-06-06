@@ -1,6 +1,6 @@
-namespace blazor.Entities
+namespace blazor.Models
 {
-    public enum SelectedView
+    public enum ViewOptionEnum
     {
         Stopwatch,
         Timer,

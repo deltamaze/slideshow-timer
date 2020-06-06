@@ -1,9 +1,9 @@
-﻿namespace blazor.Entities
+﻿namespace blazor.Store
 {
     using System;
     using System.Timers;
 
-    public class Stopwatch : RenderEntity
+    public class StopwatchState : RenderEntity
     {
         public int CurrentHour { get; private set; }
         public int CurrentMinute { get; private set; }
@@ -12,7 +12,7 @@
         private readonly System.Timers.Timer sysTimer;
         public event Action TimerTickNotifier;
 
-        public Stopwatch(Action callerOnChange) : base(callerOnChange)
+        public StopwatchState(Action callerOnChange) : base(callerOnChange)
         {
             // Create a timer with a one second interval.
             sysTimer = new System.Timers.Timer(100);

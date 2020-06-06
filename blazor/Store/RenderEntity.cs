@@ -1,4 +1,4 @@
-﻿namespace blazor.Entities
+﻿namespace blazor.Store
 {
     using System;
     using System.Timers;

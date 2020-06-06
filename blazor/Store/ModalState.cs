@@ -1,14 +1,14 @@
-﻿namespace blazor.Entities
+﻿namespace blazor.Store
 {
     using System;
     using System.Timers;
 
-    public class Modal : RenderEntity
+    public class ModalState : RenderEntity
     {
         public string ModalContentClass { get; private set; }
         public string ContentClass { get; private set; }
 
-        public Modal(Action callerOnChange) : base(callerOnChange)
+        public ModalState(Action callerOnChange) : base(callerOnChange)
         {
         }
 

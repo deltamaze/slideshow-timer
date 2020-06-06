@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using blazor.Components
 @using blazor.Store
+@using blazor.Models
 @inject AppState AppState
 @implements IDisposable
 
@@ -11,15 +12,17 @@
 <StopwatchService/>
 
 <Modal />
+
 <div id="appContents" class="@AppState.AppModal.ContentClass">
     <div id="appBody">
         <div id="appCenter">
-            <Stopwatch />
+            <ViewController />
         </div>
     </div>
     <div id="appFooter">
         <div id="appFooterActions">
-            <button class="btn-primary appFooterActions" @onclick="AppState.AppModal.ShowModal">Settings</button>
+            <PrimaryButton AdditionalCss="appFooterActions" OnClickCallback="() => { AppState.UpdateView(ViewOptionEnum.Timer); }">Timer</PrimaryButton>
+            <PrimaryButton AdditionalCss="appFooterActions" OnClickCallback="AppState.AppModal.ShowModal">Settings</PrimaryButton>
         </div>
     </div>
 </div>
@@ -37,5 +40,12 @@
     {
         AppState.OnChange -= StateHasChanged;
     }
+
+    void SwitchToTimer()
+    {
+        AppState.UpdateView(ViewOptionEnum.Timer);
+    }
+
+
 
 }
