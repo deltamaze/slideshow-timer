@@ -3,17 +3,13 @@
     using System;
     using System.Timers;
 
-    public class Modal
+    public class Modal : RenderEntity
     {
         public string ModalContentClass { get; private set; }
         public string ContentClass { get; private set; }
 
-        private readonly Action onChangeCallback;
-
-        public Modal(Action callerOnChange)
+        public Modal(Action callerOnChange) : base(callerOnChange)
         {
-            // pass reference from the user of this class
-            onChangeCallback = callerOnChange;
         }
 
         public void ShowModal()

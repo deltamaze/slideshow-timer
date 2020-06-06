@@ -5,8 +5,7 @@
 
     public class RenderEntity
     {
-
-        private readonly Action onChangeCallback;
+        protected readonly Action onChangeCallback;
 
         public RenderEntity(Action callerOnChange)
         {

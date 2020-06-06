@@ -3,21 +3,17 @@
     using System;
     using System.Timers;
 
-    public class Stopwatch
+    public class Stopwatch : RenderEntity
     {
         public int CurrentHour { get; private set; }
         public int CurrentMinute { get; private set; }
         public int CurrentSecond { get; private set; }
 
         private readonly System.Timers.Timer sysTimer;
-        private readonly Action onChangeCallback;
         public event Action TimerTickNotifier;
 
-        public Stopwatch(Action callerOnChange)
+        public Stopwatch(Action callerOnChange) : base(callerOnChange)
         {
-            // pass reference from the user of this class
-            onChangeCallback = callerOnChange;
-
             // Create a timer with a one second interval.
             sysTimer = new System.Timers.Timer(100);
             sysTimer.Elapsed += OnTimedEvent;
