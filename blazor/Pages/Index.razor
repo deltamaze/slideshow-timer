@@ -9,21 +9,9 @@
 
 <TimerService />
 <StopwatchService/>
-<div id="modalContents" class="@modalContentsClass">
-    <div class="modalBackground">
-        <div class="modal">
-            <h2>I'm a Modal</h2>
-            <p>Hear me roar.</p>
-            <button class="" @onclick="HideSettings">Close</button>
-            @*<svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
-                <rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
-            </svg>*@
 
-        </div>
-    </div>
-</div>
-
-<div id="appContents" class="@contentClass">
+@*<Modal />*@
+<div id="appContents" class="@AppState.AppModal.ContentClass">
     <div id="appBody">
         <div id="appCenter">
             <Stopwatch />
@@ -31,7 +19,7 @@
     </div>
     <div id="appFooter">
         <div id="appFooterActions">
-            <button class="btn-primary appFooterActions" @onclick="ShowSettings">Settings</button>
+            <button class="btn-primary appFooterActions" @onclick="AppState.AppModal.ShowModal">Settings</button>
         </div>
     </div>
 </div>
@@ -39,9 +27,6 @@
 
 
 @code {
-
-    string contentClass = "";
-    string modalContentsClass = "";
 
     protected override void OnInitialized()
     {
@@ -51,17 +36,6 @@
     public void Dispose()
     {
         AppState.OnChange -= StateHasChanged;
-    }
-
-    void ShowSettings()
-    {
-        contentClass = "modal-active";
-        modalContentsClass = "one";
-    }
-    void HideSettings()
-    {
-        contentClass = ""; // contentClass.Replace("modal-active","");
-        modalContentsClass += " out";
     }
 
 }

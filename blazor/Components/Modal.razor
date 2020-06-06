@@ -1,0 +1,31 @@
+﻿@namespace blazor.Components
+@using blazor.Store
+@inject AppState AppState
+@implements IDisposable
+
+<div id="modalContents" class=@AppState.AppModal.ModalContentClass>
+    <div class="modalBackground">
+        <div class="modal">
+            <h2>I'm a Modal</h2>
+            <p>Hear me roar.</p>
+            <button class="" @onclick="@AppState.AppModal.HideModal">Close</button>
+
+        </div>
+    </div>
+</div>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+
+}
+
+
