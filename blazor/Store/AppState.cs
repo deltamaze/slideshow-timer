@@ -13,23 +13,21 @@ namespace blazor.Store
         public Timer AppTimer;
         public Stopwatch AppStopwatch;
         public Modal AppModal;
-        public ViewEnum AppView;
+        public SelectedView AppView;
 
         public AppState()
         {
             AppTimer = new Timer(NotifyStateChanged);
             AppStopwatch = new Stopwatch(NotifyStateChanged);
             AppModal = new Modal(NotifyStateChanged);
-            AppView = ViewEnum.Stopwatch;
+            AppView = SelectedView.Stopwatch; // default view
         }
-        
-        public UpdateView(ViewEnum newView)
+
+        public void UpdateView(SelectedView newView)
         {
             AppView = newView;
             NotifyStateChanged();
         }
-        
-        
 
         private void NotifyStateChanged() => OnChange?.Invoke();
     }
