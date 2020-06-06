@@ -1,0 +1,22 @@
+﻿@namespace blazor.Components
+
+<button class=@GetCss() @onclick="OnClickCallback">@ChildContent</button>
+
+@code {
+[Parameter]
+    public EventCallback<MouseEventArgs>
+    OnClickCallback { get; set; }
+
+    [Parameter]
+    public string AdditionalCss { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    string GetCss(){
+        return "btn-primary "+AdditionalCss;
+    }
+
+    }
+
+

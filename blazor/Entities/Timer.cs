@@ -3,7 +3,7 @@ using System.Timers;
 
 namespace blazor.Entities
 {
-    public class Timer
+    public class Timer : RenderEntity
     {
         public int StartingHour { get; private set; }
         public int StartingMinute { get; private set; }
@@ -14,14 +14,10 @@ namespace blazor.Entities
         public bool TimerFinished { get; private set; }
 
         private readonly System.Timers.Timer sysTimer;
-        private readonly Action onChangeCallback;
         public event Action TimerTickNotifier;
 
-        public Timer(Action callerOnChange)
+        public Timer(Action callerOnChange) : base(callerOnChange)
         {
-            // pass reference from the user of this class
-            onChangeCallback = callerOnChange;
-
             // Create a timer with a one second interval.
             sysTimer = new System.Timers.Timer(100);
             sysTimer.Elapsed += OnTimedEvent;
