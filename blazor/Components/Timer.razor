@@ -11,9 +11,8 @@
 </p>
 @* Todo: break out into two buttons, one for start/pause and show depending on running status *@
 <div class="timerButtons">
-    @*<button class="btn-primary stopwatchLeftButon" @onclick="StartPause">@FormatStartPauseText()</button>*@
     <PrimaryButton AdditionalCss="timerLeftButon" OnClickCallback="StartPause">@FormatStartPauseText()</PrimaryButton>
-    <PrimaryButton AdditionalCss="timerRightButon" OnClickCallback="ResetStopwatch">Reset</PrimaryButton>
+    <PrimaryButton AdditionalCss="timerRightButon" OnClickCallback="ResetTimer">Reset</PrimaryButton>
 </div>
 
 
@@ -32,25 +31,25 @@
 
     void StartPause()
     {
-        if (AppState.AppStopwatch.IsRunning())
+        if (AppState.AppTimer.IsRunning())
         {
-            AppState.AppStopwatch.PauseStopwatch();
+            AppState.AppTimer.PauseTimer();
         }
         else
         {
-            AppState.AppStopwatch.StartStopwatch();
+            AppState.AppTimer.StartTimer();
         }
     }
-    void ResetStopwatch()
+    void ResetTimer()
     {
-        AppState.AppStopwatch.ResetStopwatch();
+        AppState.AppTimer.ResetTimer();
     }
     string FormatDisplayTime()
     {
         StringBuilder sb = new StringBuilder();
-        sb.AppendFormat("{0:D2}:", AppState.AppStopwatch.CurrentHour);
-        sb.AppendFormat("{0:D2}:", AppState.AppStopwatch.CurrentMinute);
-        sb.AppendFormat("{0:D2}", AppState.AppStopwatch.CurrentSecond);
+        sb.AppendFormat("{0:D2}:", AppState.AppTimer.CurrentHour);
+        sb.AppendFormat("{0:D2}:", AppState.AppTimer.CurrentMinute);
+        sb.AppendFormat("{0:D2}", AppState.AppTimer.CurrentSecond);
 
         return sb.ToString();
     }
@@ -58,7 +57,7 @@
     string FormatStartPauseText()
     {
 
-        return AppState.AppStopwatch.IsRunning() ? "Stop" : "Start";
+        return AppState.AppTimer.IsRunning() ? "Stop" : "Start";
     }
 
 }

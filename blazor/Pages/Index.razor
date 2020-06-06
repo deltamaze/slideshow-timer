@@ -21,6 +21,7 @@
     </div>
     <div id="appFooter">
         <div id="appFooterActions">
+            <PrimaryButton AdditionalCss="appFooterActions" OnClickCallback="() => { AppState.UpdateView(ViewOptionEnum.Stopwatch); }">StopWatch</PrimaryButton>
             <PrimaryButton AdditionalCss="appFooterActions" OnClickCallback="() => { AppState.UpdateView(ViewOptionEnum.Timer); }">Timer</PrimaryButton>
             <PrimaryButton AdditionalCss="appFooterActions" OnClickCallback="AppState.AppModal.ShowModal">Settings</PrimaryButton>
         </div>

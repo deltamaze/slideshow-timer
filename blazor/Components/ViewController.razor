@@ -1,9 +1,32 @@
 ﻿@namespace blazor.Components
 @using blazor.Store
+@using blazor.Models
 @inject AppState AppState
 @implements IDisposable
 
-<Stopwatch />
+@switch (AppState.AppView)
+{
+    case ViewOptionEnum.Timer:
+        <Timer />
+        break;
+    case ViewOptionEnum.Stopwatch:
+        <Stopwatch />
+        break;
+    case ViewOptionEnum.Splits:
+        <div>TODO</div>
+        break;
+}
+@*switch (priority)
+    {
+        case Priority.Low:
+        case Priority.Medium:
+        case Priority.Zero:
+        default:
+            return false;
+        case Priority.Important:
+        case Priority.Critical:
+            return true;
+    }*@
 
 @code {
 

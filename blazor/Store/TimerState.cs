@@ -25,7 +25,7 @@ namespace blazor.Store
             // initial values
             TimerFinished = false;
             StartingHour = 0;
-            StartingMinute = 0;
+            StartingMinute = 10;
             StartingSecond = 0;
             ResetTimer();
         }
@@ -62,6 +62,11 @@ namespace blazor.Store
             CurrentSecond = StartingSecond;
 
             onChangeCallback.Invoke();
+        }
+
+        public bool IsRunning()
+        {
+            return sysTimer.Enabled;
         }
 
         public void DecrementTimer()

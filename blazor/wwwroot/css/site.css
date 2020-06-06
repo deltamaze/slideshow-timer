@@ -67,7 +67,7 @@ html, body {
         transform: translate(-50%, -50%)
     }
 
-.stopwatchButtons {
+.timerButtons {
     margin: 0;
     position: absolute;
     top: 50%;
@@ -78,18 +78,17 @@ html, body {
     width: 16em;
 }
 
-.stopwatchLeftButon {
+.timerLeftButon {
     position: relative;
     float: left;
 }
 
-.stopwatchRightButon {
+.timerRightButon {
     position: relative;
     float: right;
 }
 
 #appFooter {
-    background: red; /*enabled for visualisation*/
     position: absolute;
     left: 0;
     right: 0;
