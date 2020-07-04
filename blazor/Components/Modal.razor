@@ -1,20 +1,31 @@
 ﻿@namespace blazor.Components
 @using blazor.Store
+@using blazor.Models
 @inject AppState AppState
 @implements IDisposable
 
 <div id="modalContents" class=@AppState.AppModal.ModalContentClass>
     <div class="modalBackground">
         <div class="modal">
-            <h2>I'm a Modal</h2>
-            <p>Hear me roar.</p>
-            <button class="" @onclick="@AppState.AppModal.HideModal">Close</button>
+            <h2>Configure Timer</h2>
+            <EditForm Model="@inputFields" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                Hours: <InputNumber id="hour" min="0" max="99" @bind-Value="@inputFields.Hour" /><br />
+                Minutes: <InputNumber id="minute" min="0" max="60" @bind-Value="@inputFields.Minute" /><br />
+                Seconds: <InputNumber id="second" min="0" max="60" @bind-Value="@inputFields.Seconds" /><br />
+                <button type="submit" class="">Save</button>
+                <button class="" @onclick="@AppState.AppModal.HideModal">Cancel</button>
+            </EditForm>
 
         </div>
     </div>
 </div>
 
 @code {
+
+    TimerInput inputFields = new TimerInput();
+
 
     protected override void OnInitialized()
     {
@@ -24,6 +35,12 @@
     public void Dispose()
     {
         AppState.OnChange -= StateHasChanged;
+    }
+
+    private void HandleValidSubmit()
+    {
+        AppState.AppTimer.SetTimer(inputFields.Hour, inputFields.Minute, inputFields.Seconds);
+        AppState.AppModal.HideModal();
     }
 
 }

@@ -12,6 +12,7 @@
 @* Todo: break out into two buttons, one for start/pause and show depending on running status *@
 <div class="timerButtons">
     <PrimaryButton AdditionalCss="timerLeftButon" OnClickCallback="StartPause">@FormatStartPauseText()</PrimaryButton>
+    <PrimaryButton AdditionalCss="timerMiddleButon" OnClickCallback="AppState.AppModal.ShowModal">Settings</PrimaryButton>
     <PrimaryButton AdditionalCss="timerRightButon" OnClickCallback="ResetTimer">Reset</PrimaryButton>
 </div>
 
@@ -21,11 +22,13 @@
 
     protected override void OnInitialized()
     {
+        AppState.AppModal.ResetModalDisplay();
         AppState.OnChange += StateHasChanged;
     }
 
     public void Dispose()
     {
+        AppState.AppModal.ResetModalDisplay();
         AppState.OnChange -= StateHasChanged;
     }
 

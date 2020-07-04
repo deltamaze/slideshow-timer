@@ -27,5 +27,11 @@
 
             onChangeCallback.Invoke();
         }
+
+        public void ResetModalDisplay() // when reloading timer, don't re-animate modal
+        {
+            ContentClass = ""; // contentClass.Replace("modal-active","");
+            ModalContentClass = "";
+        }
     }
 }
