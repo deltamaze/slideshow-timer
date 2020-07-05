@@ -50,9 +50,9 @@
     string FormatDisplayTime()
     {
         StringBuilder sb = new StringBuilder();
-        sb.AppendFormat("{0:D2}:", AppState.AppTimer.CurrentHour);
+        sb.AppendFormat("{0:D2}:", AppState.AppTimer.CurrentHours);
         sb.AppendFormat("{0:D2}:", AppState.AppTimer.CurrentMinute);
-        sb.AppendFormat("{0:D2}", AppState.AppTimer.CurrentSecond);
+        sb.AppendFormat("{0:D2}", AppState.AppTimer.CurrentSeconds);
 
         return sb.ToString();
     }

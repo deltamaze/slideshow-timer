@@ -5,12 +5,12 @@ namespace blazor.Store
 {
     public class TimerState : RenderEntity
     {
-        public int StartingHour { get; private set; }
-        public int StartingMinute { get; private set; }
-        public int StartingSecond { get; private set; }
-        public int CurrentHour { get; private set; }
+        public int StartingHours { get; private set; }
+        public int StartingMinutes { get; private set; }
+        public int StartingSeconds { get; private set; }
+        public int CurrentHours { get; private set; }
         public int CurrentMinute { get; private set; }
-        public int CurrentSecond { get; private set; }
+        public int CurrentSeconds { get; private set; }
         public bool TimerFinished { get; private set; }
 
         private readonly System.Timers.Timer sysTimer;
@@ -19,22 +19,22 @@ namespace blazor.Store
         public TimerState(Action callerOnChange) : base(callerOnChange)
         {
             // Create a timer with a one second interval.
-            sysTimer = new System.Timers.Timer(100);
+            sysTimer = new System.Timers.Timer(1000);
             sysTimer.Elapsed += OnTimedEvent;
             sysTimer.AutoReset = true;
             // initial values
             TimerFinished = false;
-            StartingHour = 0;
-            StartingMinute = 10;
-            StartingSecond = 0;
+            StartingHours = 0;
+            StartingMinutes = 10;
+            StartingSeconds = 0;
             ResetTimer();
         }
 
         public void SetTimer(int hour, int minute, int second)
         {
-            StartingHour = hour;
-            StartingMinute = minute;
-            StartingSecond = second;
+            StartingHours = hour;
+            StartingMinutes = minute;
+            StartingSeconds = second;
             ResetTimer();
 
             onChangeCallback.Invoke();
@@ -57,9 +57,9 @@ namespace blazor.Store
         public void ResetTimer()
         {
             PauseTimer();
-            CurrentHour = StartingHour;
-            CurrentMinute = StartingMinute;
-            CurrentSecond = StartingSecond;
+            CurrentHours = StartingHours;
+            CurrentMinute = StartingMinutes;
+            CurrentSeconds = StartingSeconds;
 
             onChangeCallback.Invoke();
         }
@@ -71,18 +71,18 @@ namespace blazor.Store
 
         public void DecrementTimer()
         {
-            if (CurrentSecond != 0)
+            if (CurrentSeconds != 0)
             {
-                CurrentSecond -= 1;
+                CurrentSeconds -= 1;
             }
             else if (CurrentMinute != 0)
             {
                 CurrentMinute -= 1;
-                CurrentSecond = 59;
+                CurrentSeconds = 59;
             }
-            else if (CurrentHour != 0)
+            else if (CurrentHours != 0)
             {
-                CurrentHour -= 1;
+                CurrentHours -= 1;
                 CurrentMinute = 59;
                 CurrentMinute = 59;
             }

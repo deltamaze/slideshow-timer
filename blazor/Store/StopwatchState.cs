@@ -5,9 +5,9 @@
 
     public class StopwatchState : RenderEntity
     {
-        public int CurrentHour { get; private set; }
-        public int CurrentMinute { get; private set; }
-        public int CurrentSecond { get; private set; }
+        public int CurrentHours { get; private set; }
+        public int CurrentMinutes { get; private set; }
+        public int CurrentSeconds { get; private set; }
 
         private readonly System.Timers.Timer sysTimer;
         public event Action TimerTickNotifier;
@@ -15,7 +15,7 @@
         public StopwatchState(Action callerOnChange) : base(callerOnChange)
         {
             // Create a timer with a one second interval.
-            sysTimer = new System.Timers.Timer(100);
+            sysTimer = new System.Timers.Timer(1000);
             sysTimer.Elapsed += OnTimedEvent;
             sysTimer.AutoReset = true;
             // initial values
@@ -39,9 +39,9 @@
         public void ResetStopwatch()
         {
             PauseStopwatch();
-            CurrentHour = 0;
-            CurrentMinute = 0;
-            CurrentSecond = 0;
+            CurrentHours = 0;
+            CurrentMinutes = 0;
+            CurrentSeconds = 0;
 
             onChangeCallback.Invoke();
         }
@@ -53,20 +53,20 @@
 
         public void IncrementStopwatch()
         {
-            if (CurrentSecond != 59)
+            if (CurrentSeconds != 59)
             {
-                CurrentSecond += 1;
+                CurrentSeconds += 1;
             }
-            else if (CurrentMinute != 59)
+            else if (CurrentMinutes != 59)
             {
-                CurrentMinute += 1;
-                CurrentSecond = 0;
+                CurrentMinutes += 1;
+                CurrentSeconds = 0;
             }
             else
             {
-                CurrentHour += 1;
-                CurrentMinute = 0;
-                CurrentMinute = 0;
+                CurrentHours += 1;
+                CurrentMinutes = 0;
+                CurrentMinutes = 0;
             }
 
             onChangeCallback.Invoke();

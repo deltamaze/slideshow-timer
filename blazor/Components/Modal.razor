@@ -11,11 +11,11 @@
             <EditForm Model="@inputFields" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
-                Hours: <InputNumber id="hour" min="0" max="99" @bind-Value="@inputFields.Hour" /><br />
-                Minutes: <InputNumber id="minute" min="0" max="60" @bind-Value="@inputFields.Minute" /><br />
+                Hours: <InputNumber id="hour" min="0" max="99" @bind-Value="@inputFields.Hours" /><br />
+                Minutes: <InputNumber id="minute" min="0" max="60" @bind-Value="@inputFields.Minutes" /><br />
                 Seconds: <InputNumber id="second" min="0" max="60" @bind-Value="@inputFields.Seconds" /><br />
                 <button type="submit" class="">Save</button>
-                <button class="" @onclick="@AppState.AppModal.HideModal">Cancel</button>
+                <button class="" @onclick="@HandleClose">Cancel</button>
             </EditForm>
 
         </div>
@@ -30,6 +30,7 @@
     protected override void OnInitialized()
     {
         AppState.OnChange += StateHasChanged;
+        SyncLocalInputVariableToState();
     }
 
     public void Dispose()
@@ -39,8 +40,19 @@
 
     private void HandleValidSubmit()
     {
-        AppState.AppTimer.SetTimer(inputFields.Hour, inputFields.Minute, inputFields.Seconds);
+        AppState.AppTimer.SetTimer(inputFields.Hours, inputFields.Minutes, inputFields.Seconds);
         AppState.AppModal.HideModal();
+    }
+    private void HandleClose()
+    {
+        SyncLocalInputVariableToState(); // undo changes to local variables
+        AppState.AppModal.HideModal();
+    }
+    private void SyncLocalInputVariableToState()
+    {
+        inputFields.Seconds = AppState.AppTimer.StartingSeconds;
+        inputFields.Minutes = AppState.AppTimer.StartingMinutes;
+        inputFields.Hours = AppState.AppTimer.StartingHours;
     }
 
 }

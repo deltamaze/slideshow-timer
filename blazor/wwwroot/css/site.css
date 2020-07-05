@@ -30,6 +30,10 @@ html, body {
         color: #000000;
         background-color: #FFFFFF;
     }
+.selectedButton{
+    color: #000000;
+    background-color: #FFFFFF;
+}
 
 @media all and (max-width:30em) {
       .btn-primary {

@@ -9,7 +9,7 @@
 
 
 <TimerService />
-<StopwatchService/>
+<StopwatchService />
 
 <Modal />
 
@@ -21,9 +21,19 @@
     </div>
     <div id="appFooter">
         <div id="appFooterActions">
-            <PrimaryButton AdditionalCss="appFooterActions" OnClickCallback="() => { AppState.UpdateView(ViewOptionEnum.Stopwatch); }">StopWatch</PrimaryButton>
-            <PrimaryButton AdditionalCss="appFooterActions" OnClickCallback="() => { AppState.UpdateView(ViewOptionEnum.Timer); }">Timer</PrimaryButton>
-            
+            <PrimaryButton AdditionalCss=@FooterButtonClass(ViewOptionEnum.Stopwatch)
+                           OnClickCallback="() => {
+                                                AppState.UpdateView(ViewOptionEnum.Stopwatch); 
+                                            }">
+                StopWatch
+            </PrimaryButton>
+            <PrimaryButton AdditionalCss=@FooterButtonClass(ViewOptionEnum.Timer)
+                           OnClickCallback="() => {
+                                                AppState.UpdateView(ViewOptionEnum.Timer);
+                                            }">
+                Timer
+            </PrimaryButton>
+
         </div>
     </div>
 </div>
@@ -46,7 +56,18 @@
     {
         AppState.UpdateView(ViewOptionEnum.Timer);
     }
-
+    private string FooterButtonClass(ViewOptionEnum buttonType)
+    {
+        // if button is also the current view, display as depressed
+        if (buttonType == AppState.AppView)
+        {
+            return "appFooterActions selectedButton";
+        }
+        else
+        {
+            return "appFooterActions";
+        }
+    }
 
 
 }
