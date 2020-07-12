@@ -45,17 +45,40 @@ html, body {
 #appContents {
     height: 100vh;
     position: relative;
+    overflow: hidden;
 }
 #imageContainer {
     background-color: #333;
-    width: 450px;
-    height: 300px;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
     border: 2px #333 solid;
 }
 #imageContainer img {
     animation: kenburns 20s infinite;
 }
+
+
+.banner-img:nth-child(1) {
+    animation-name: kenburns-1;
+    z-index: 3;
+}
+.banner-img:nth-child(2) {
+    animation-name: kenburns-2;
+    z-index: 2;
+}
+.banner-img:nth-child(3) {
+    animation-name: kenburns-3;
+    z-index: 1;
+}
+.banner-img:nth-child(4) {
+    animation-name: kenburns-4;
+    z-index: 0;
+}
+
+ 
+
+
 
 #appBody {
     padding: 10px;
@@ -260,7 +283,7 @@ html.modal-active, body.modal-active {
         transform: scale(0);
     }
 }
-@keyframes kenburns {
+@keyframes kenburns-1 {
     0% {
       opacity: 0;
     }
@@ -277,3 +300,92 @@ html.modal-active, body.modal-active {
         opacity: 0;
     }
 }
+
+
+@keyframes animate-1 {
+    0% {
+    opacity: 1;
+    transform: scale(1.2);
+    }
+    1.5% {
+    opacity: 1;
+    }
+    23% {
+    opacity: 1;
+    }
+    26% {
+    opacity: 0;
+    transform: scale(1);
+    }
+    100% {
+    opacity: 0;
+    transform: scale(1.2);
+    }
+    98% {
+    opacity: 0;
+    transform: scale(1.22);
+    }
+    100% {
+    opacity: 1;
+    }
+    }
+    
+    @keyframes animate-2 {
+    23% {
+    opacity: 1;
+    transform: scale(1.2);
+    }
+    26% {
+    opacity: 1;
+    }
+    48% {
+    opacity: 1;
+    }
+    51% {
+    opacity: 0;
+    transform: scale(1);
+    }
+    100% {
+    opacity: 0;
+    transform: scale(1.2);
+    }
+    }
+    
+    @keyframes animate-3 {
+    48% {
+    opacity: 1;
+    transform: scale(1.2);
+    }
+    51% {
+    opacity: 1;
+    }
+    73% {
+    opacity: 1;
+    }
+    76% {
+    opacity: 0;
+    transform: scale(1);
+    }
+    100% {
+    opacity: 0;
+    transform: scale(1.2);
+    }
+    }
+    
+    @keyframes animate-4 {
+    73% {
+    opacity: 1;
+    transform: scale(1.2);
+    }
+    76% {
+    opacity: 1;
+    }
+    98% {
+    opacity: 1;
+    }
+    100% {
+    opacity: 0;
+    transform: scale(1);
+    }
+    }
+    
