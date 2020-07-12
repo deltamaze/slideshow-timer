@@ -9,17 +9,23 @@
 <p>
     @FormatDisplayTime()
 </p>
-@* Todo: break out into two buttons, one for start/pause and show depending on running status *@
+
 <div class="timerButtons">
-    @*<button class="btn-primary stopwatchLeftButon" @onclick="StartPause">@FormatStartPauseText()</button>*@
-    <PrimaryButton AdditionalCss="timerLeftButon" OnClickCallback="StartPause">@FormatStartPauseText()</PrimaryButton>
-    <PrimaryButton AdditionalCss="timerRightButon" OnClickCallback="ResetStopwatch">Reset</PrimaryButton>
+    
+    <PrimaryButton
+        AdditionalCss="timerLeftButton"
+        OnClickCallback="StartPause">
+            @FormatStartPauseText()
+    </PrimaryButton>
+    <PrimaryButton
+        AdditionalCss="timerRightButton"
+        OnClickCallback="ResetStopwatch">
+            Reset
+    </PrimaryButton>
 </div>
 
 
 @code {
-
-
     protected override void OnInitialized()
     {
         AppState.OnChange += StateHasChanged;
@@ -60,5 +66,4 @@
 
         return AppState.AppStopwatch.IsRunning() ? "Stop" : "Start";
     }
-
 }

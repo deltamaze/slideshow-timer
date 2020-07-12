@@ -46,6 +46,16 @@ html, body {
     height: 100vh;
     position: relative;
 }
+#imageContainer {
+    background-color: #333;
+    width: 450px;
+    height: 300px;
+    overflow: hidden;
+    border: 2px #333 solid;
+}
+#imageContainer img {
+    animation: kenburns 20s infinite;
+}
 
 #appBody {
     padding: 10px;
@@ -83,16 +93,16 @@ html, body {
     text-align: center;
 }
 
-.timerLeftButon {
+.timerLeftButton {
     position: relative;
     float: left;
 }
 
-.timerMiddleButon {
+.timerMiddleButton {
     position: relative;    
 }
 
-.timerRightButon {
+.timerRightButton {
     position: relative;
     float: right;
 }
@@ -248,5 +258,22 @@ html.modal-active, body.modal-active {
 
     100% {
         transform: scale(0);
+    }
+}
+@keyframes kenburns {
+    0% {
+      opacity: 0;
+    }
+    5% {
+      opacity: 1;
+    }
+    95% {
+        transform: scale3d(1.5, 1.5, 1.5) translate3d(-190px, -120px, 0px);
+        animation-timing-function: ease-in;
+        opacity: 1;
+    }
+    100% {
+        transform: scale3d(2, 2, 2) translate3d(-170px, -100px, 0px);
+        opacity: 0;
     }
 }

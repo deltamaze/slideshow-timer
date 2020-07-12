@@ -7,13 +7,17 @@
 
 
 
-
+<base href="~/" />
 <TimerService />
 <StopwatchService />
 
 <Modal />
 
 <div id="appContents" class="@AppState.AppModal.ContentClass">
+    <div id="imageContainer">
+        <img asp-append-version="true" src="art/Edouard-Cortes-Republic-Square.jpg">
+    </div>
+    
     <div id="appBody">
         <div id="appCenter">
             <ViewController />
@@ -41,7 +45,6 @@
 
 
 @code {
-
     protected override void OnInitialized()
     {
         AppState.OnChange += StateHasChanged;
