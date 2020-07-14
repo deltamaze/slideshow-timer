@@ -60,10 +60,11 @@ html, body {
     width: 100%;
     height: 100%;
     background: no-repeat 50% 50%;
+    background-color: black;
     background-size: cover;
-    animation: animate 30s linear infinite;
+    animation: animate 60s linear infinite;
     opacity: 1;
-    transform: scale(1.9);
+    /* transform: scale(1.9); */
 }
 .banner-img:nth-child(1) {
     animation-name: animate-1;
@@ -307,7 +308,7 @@ html.modal-active, body.modal-active {
 @keyframes animate-1 {
     0% {
       opacity: 1;
-      transform: scale(1);
+      transform: scale3d(1.2, 1.2, 1.2) translate3d(-19px, -12px, 0px);
     }
     1.5% {
       opacity: 1;
@@ -317,23 +318,27 @@ html.modal-active, body.modal-active {
     }
     26% {
       opacity: 0;
-      transform: scale(1.9);
+      /* transform: scale(1.9); */
+      transform: scale3d(2.5, 2.5, 2.5) translate3d(-120px, -120px, 0px);
+      animation-timing-function: ease-in;
     }
     30%{
       transform: scale(1);
     }
-    98% {
+    95% {
       opacity: 0;
+      transform: scale(1);
     }
     100% {
       opacity: 1;
+      transform: scale3d(1.2, 1.2, 1.2) translate3d(-19px, -12px, 0px);
     }
   }
   
   @keyframes animate-2 {
     23% {
       opacity: 1;
-      transform: scale(1.9);
+      transform: scale(2.5) translate3d(120px, -120px, 0px);
     }
     26% {
       opacity: 1;
@@ -347,14 +352,13 @@ html.modal-active, body.modal-active {
     }
     100% {
       opacity: 0;
-      transform: scale(1.9);
     }
   }
   
   @keyframes animate-3 {
     48% {
       opacity: 1;
-      transform: scale(1.9);
+      transform: scale(1);
     }
     51% {
       opacity: 1;
@@ -364,18 +368,19 @@ html.modal-active, body.modal-active {
     }
     76% {
       opacity: 0;
-      transform: scale(1);
+      transform: scale3d(2.9, 2.9, 2.9) translate3d(120px, -120px, 0px);
+      animation-timing-function: ease-in;
     }
     100% {
       opacity: 0;
-      transform: scale(1.9);
+      transform: scale(1);
     }
   }
   
   @keyframes animate-4 {
     73% {
       opacity: 1;
-      transform: scale(1.9);
+      transform: scale(2.5) translate3d(-120px, -120px, 0px);;
     }
     76% {
       opacity: 1;
