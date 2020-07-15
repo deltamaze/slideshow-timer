@@ -15,7 +15,7 @@
                 Minutes: <InputNumber id="minute" min="0" max="60" @bind-Value="@inputFields.Minutes" /><br />
                 Seconds: <InputNumber id="second" min="0" max="60" @bind-Value="@inputFields.Seconds" /><br />
                 <button type="submit" class="">Save</button>
-                <button class="" @onclick="@HandleClose">Cancel</button>
+                <button type="button" class="" @onclick="@HandleClose">Cancel</button>
             </EditForm>
 
         </div>
@@ -23,7 +23,6 @@
 </div>
 
 @code {
-
     TimerInput inputFields = new TimerInput();
 
 
@@ -45,7 +44,7 @@
     }
     private void HandleClose()
     {
-        SyncLocalInputVariableToState(); // undo changes to local variables
+        // SyncLocalInputVariableToState(); // undo changes to local variables
         AppState.AppModal.HideModal();
     }
     private void SyncLocalInputVariableToState()
