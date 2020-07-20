@@ -9,10 +9,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using blazorwasm.Data;
 
-using blazor.Store;
-
-namespace blazor
+namespace blazorwasm
 {
     public class Startup
     {
@@ -27,9 +26,9 @@ namespace blazor
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddRazorPages();
-            // services.AddServerSideBlazor();
-            services.AddSingleton<AppState>();
+            services.AddRazorPages();
+            services.AddServerSideBlazor();
+            services.AddSingleton<WeatherForecastService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,15 +46,15 @@ namespace blazor
             }
 
             app.UseHttpsRedirection();
-            // app.UseStaticFiles();
+            app.UseStaticFiles();
 
-            // app.UseRouting();
+            app.UseRouting();
 
-            // app.UseEndpoints(endpoints =>
-            // {
-            //     // endpoints.MapBlazorHub();
-            //     endpoints.MapFallbackToPage("/_Host");
-            // });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_Host");
+            });
         }
     }
 }
