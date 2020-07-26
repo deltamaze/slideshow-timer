@@ -1,0 +1,59 @@
+﻿@namespace blazor.Components
+@using blazor.Store
+@using blazor.Models
+@inject AppState AppState
+@implements IDisposable
+
+<div id="modalContents" class=@AppState.AppModal.ModalContentClass>
+    <div class="modalBackground">
+        <div class="modal">
+            <h2>Configure Timer</h2>
+            <EditForm Model="@inputFields" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                Hours: <InputNumber id="hour" min="0" max="99" @bind-Value="@inputFields.Hours" /><br />
+                Minutes: <InputNumber id="minute" min="0" max="60" @bind-Value="@inputFields.Minutes" /><br />
+                Seconds: <InputNumber id="second" min="0" max="60" @bind-Value="@inputFields.Seconds" /><br />
+                <button type="submit" class="">Save</button>
+                <button type="button" class="" @onclick="@HandleClose">Cancel</button>
+            </EditForm>
+
+        </div>
+    </div>
+</div>
+
+@code {
+    TimerInput inputFields = new TimerInput();
+
+
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+        SyncLocalInputVariableToState();
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+
+    private void HandleValidSubmit()
+    {
+        AppState.AppTimer.SetTimer(inputFields.Hours, inputFields.Minutes, inputFields.Seconds);
+        AppState.AppModal.HideModal();
+    }
+    private void HandleClose()
+    {
+        // SyncLocalInputVariableToState(); // undo changes to local variables
+        AppState.AppModal.HideModal();
+    }
+    private void SyncLocalInputVariableToState()
+    {
+        inputFields.Seconds = AppState.AppTimer.StartingSeconds;
+        inputFields.Minutes = AppState.AppTimer.StartingMinutes;
+        inputFields.Hours = AppState.AppTimer.StartingHours;
+    }
+
+}
+
+

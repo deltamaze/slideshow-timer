@@ -1,0 +1,82 @@
+﻿@page "/"
+@using blazor.Components
+@using blazor.Store
+@using blazor.Models
+@inject AppState AppState
+@implements IDisposable
+
+
+
+<base href="~/" />
+<TimerService />
+<StopwatchService />
+
+<Modal />
+
+<div id="appContents" class="@AppState.AppModal.ContentClass">
+
+    <div class="art-container">
+        <div class="art-container-img" style="background-image: url('art/2.jpg')">
+        </div>
+        <div class="art-container-img" style="background-image: url('art/3.jpg')">
+        </div>
+        <div class="art-container-img" style="background-image: url('art/4.jpg')">
+        </div>
+        <div class="art-container-img" style="background-image: url('art/1.jpg')">
+        </div>
+    </div>
+        
+    <div id="appBody">
+        <div id="appCenter">
+            <ViewController />
+        </div>
+    </div>
+    <div id="appFooter">
+        <div id="appFooterActions">
+            <PrimaryButton AdditionalCss=@FooterButtonClass(ViewOptionEnum.Stopwatch)
+                           OnClickCallback="() => {
+                                                AppState.UpdateView(ViewOptionEnum.Stopwatch); 
+                                            }">
+                StopWatch
+            </PrimaryButton>
+            <PrimaryButton AdditionalCss=@FooterButtonClass(ViewOptionEnum.Timer)
+                           OnClickCallback="() => {
+                                                AppState.UpdateView(ViewOptionEnum.Timer);
+                                            }">
+                Timer
+            </PrimaryButton>
+
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+
+    void SwitchToTimer()
+    {
+        AppState.UpdateView(ViewOptionEnum.Timer);
+    }
+    private string FooterButtonClass(ViewOptionEnum buttonType)
+    {
+        // if button is also the current view, display as depressed
+        if (buttonType == AppState.AppView)
+        {
+            return "appFooterActions selectedButton";
+        }
+        else
+        {
+            return "appFooterActions";
+        }
+    }
+}

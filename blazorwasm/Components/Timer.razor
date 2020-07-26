@@ -1,0 +1,66 @@
+﻿@namespace blazor.Components
+@using System.Text;
+@using blazor.Store
+@inject AppState AppState
+@implements IDisposable
+
+
+
+<p>
+    @FormatDisplayTime()
+</p>
+@* Todo: break out into two buttons, one for start/pause and show depending on running status *@
+<div class="timerButtons">
+    <PrimaryButton AdditionalCss="timerLeftButton" OnClickCallback="StartPause">@FormatStartPauseText()</PrimaryButton>
+    <PrimaryButton AdditionalCss="timerMiddleButton" OnClickCallback="AppState.AppModal.ShowModal">Settings</PrimaryButton>
+    <PrimaryButton AdditionalCss="timerRightButton" OnClickCallback="ResetTimer">Reset</PrimaryButton>
+</div>
+
+
+@code {
+
+
+    protected override void OnInitialized()
+    {
+        AppState.AppModal.ResetModalDisplay();
+        AppState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        AppState.AppModal.ResetModalDisplay();
+        AppState.OnChange -= StateHasChanged;
+    }
+
+    void StartPause()
+    {
+        if (AppState.AppTimer.IsRunning())
+        {
+            AppState.AppTimer.PauseTimer();
+        }
+        else
+        {
+            AppState.AppTimer.StartTimer();
+        }
+    }
+    void ResetTimer()
+    {
+        AppState.AppTimer.ResetTimer();
+    }
+    string FormatDisplayTime()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendFormat("{0:D2}:", AppState.AppTimer.CurrentHours);
+        sb.AppendFormat("{0:D2}:", AppState.AppTimer.CurrentMinute);
+        sb.AppendFormat("{0:D2}", AppState.AppTimer.CurrentSeconds);
+
+        return sb.ToString();
+    }
+
+    string FormatStartPauseText()
+    {
+
+        return AppState.AppTimer.IsRunning() ? "Stop" : "Start";
+    }
+
+}

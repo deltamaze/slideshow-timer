@@ -1,0 +1,69 @@
+﻿@namespace blazor.Components
+@using System.Text;
+@using blazor.Store
+@inject AppState AppState
+@implements IDisposable
+
+
+
+<p>
+    @FormatDisplayTime()
+</p>
+
+<div class="timerButtons">
+    
+    <PrimaryButton
+        AdditionalCss="timerLeftButton"
+        OnClickCallback="StartPause">
+            @FormatStartPauseText()
+    </PrimaryButton>
+    <PrimaryButton
+        AdditionalCss="timerRightButton"
+        OnClickCallback="ResetStopwatch">
+            Reset
+    </PrimaryButton>
+</div>
+
+
+@code {
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+
+    void StartPause()
+    {
+        if (AppState.AppStopwatch.IsRunning())
+        {
+            AppState.AppStopwatch.PauseStopwatch();
+        }
+        else
+        {
+            AppState.AppStopwatch.StartStopwatch();
+        }
+    }
+    void ResetStopwatch()
+    {
+        AppState.AppStopwatch.ResetStopwatch();
+    }
+    string FormatDisplayTime()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendFormat("{0:D2}:", AppState.AppStopwatch.CurrentHours);
+        sb.AppendFormat("{0:D2}:", AppState.AppStopwatch.CurrentMinutes);
+        sb.AppendFormat("{0:D2}", AppState.AppStopwatch.CurrentSeconds);
+
+        return sb.ToString();
+    }
+
+    string FormatStartPauseText()
+    {
+
+        return AppState.AppStopwatch.IsRunning() ? "Stop" : "Start";
+    }
+}

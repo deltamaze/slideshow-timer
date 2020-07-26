@@ -1,0 +1,25 @@
+﻿@namespace blazor.Components
+@using blazor.Store
+@inject AppState AppState
+@implements IDisposable
+
+
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        AppState.AppStopwatch.TimerTickNotifier += OnReceiveTick;
+        // AppState.AppTimer.SetTimerTickNotifier(OnReceiveTick);
+
+    }
+
+    async void OnReceiveTick()
+    {
+        await InvokeAsync(AppState.AppStopwatch.IncrementStopwatch);
+    }
+    public void Dispose()
+    {
+        AppState.AppStopwatch.TimerTickNotifier -= OnReceiveTick;
+    }
+}
