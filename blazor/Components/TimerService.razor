@@ -1,12 +1,12 @@
 ﻿@namespace blazor.Components
 @using blazor.Store
+@using blazor.Models
 @inject AppState AppState
 @implements IDisposable
 
 
 
 @code {
-
     protected override void OnInitialized()
     {
         AppState.AppTimer.TimerTickNotifier += OnReceiveTick;
@@ -17,6 +17,16 @@
     async void OnReceiveTick()
     {
         await InvokeAsync(AppState.AppTimer.DecrementTimer);
+        // if timer == 00, set view to dismiss timer
+        if (AppState.AppTimer.TimerFinished)
+        {
+            await InvokeAsync(ShowDismiss);
+        }
+
+    }
+    private void ShowDismiss()
+    {
+        AppState.UpdateView(ViewOptionEnum.Dismiss);
     }
     public void Dispose()
     {

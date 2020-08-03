@@ -4,6 +4,7 @@ namespace blazor.Models
     {
         Stopwatch,
         Timer,
-        Splits
+        Splits,
+        Dismiss
     }
 }

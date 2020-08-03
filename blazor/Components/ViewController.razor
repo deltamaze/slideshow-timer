@@ -12,6 +12,9 @@
     case ViewOptionEnum.Stopwatch:
         <Stopwatch />
         break;
+    case ViewOptionEnum.Dismiss:
+        <Dismiss />
+        break;
     case ViewOptionEnum.Splits:
         <div>TODO</div>
         break;
@@ -29,7 +32,6 @@
     }*@
 
 @code {
-
     protected override void OnInitialized()
     {
         AppState.OnChange += StateHasChanged;
