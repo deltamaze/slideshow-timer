@@ -43,6 +43,8 @@ namespace blazor.Store
         public void StartTimer()
         {
             // only start if component is listening to changes
+            DecrementTimer(); // for design reasons, looks good to immediately decrement
+
             if (TimerTickNotifier != null)
             {
                 sysTimer.Start();

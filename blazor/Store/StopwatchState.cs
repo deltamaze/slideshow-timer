@@ -24,6 +24,7 @@
 
         public void StartStopwatch()
         {
+            IncrementStopwatch(); // for design reasons, looks good to immediately increment
             // only start if component is listening to changes
             if (TimerTickNotifier != null)
             {
