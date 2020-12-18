@@ -1,0 +1,198 @@
+﻿@using System.Timers;
+@using CyberTimer.Data;
+
+@page "/"
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nam</th>
+            <th>Est</th>
+            <th>Act</th>
+            <th>Δ</th>
+            <th>-</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < splits.Count; i++)
+        {
+            int index = i;
+            if (splits[index].EditMode)
+            {
+                <tr>
+                    <td>
+                        <button @onclick="()=>MoveUp(index)">[▲]</button>
+                        <button @onclick="()=>MoveDown(index)">[▼]</button>
+                        <input type="text" @bind-value="splits[index].Name" />
+                    </td>
+                    <td><input type="number" min="0" step="1" @bind-value="splits[index].HourEstimated" />:<input type="number" min="0" max="59" step="1" @bind-value="splits[index].MinuteEstimated" />:<input type="number" min="0" step="1" max="59" @bind-value="splits[index].SecondEstimated" /></td>
+                    <td>@splits[index].FormatActualTime()</td>
+                    <td>-</td>
+                    <td><button @onclick="() => RemoveSplit(index)">[Del]</button><button @onclick="() => ToggleEditMode(index)">[Sav]</button></td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>@splits[index].Name</td>
+                    <td>@splits[index].FormattedEstimatedTime()</td>
+                    <td>@splits[index].FormatActualTime()</td>
+                    <td>@splits[index].FormatDelta()</td>
+                    <td>
+                        @if (index == splitIndex && aTimer.Enabled)
+                        {
+                            <button @onclick="ToggleTimer">[II]</button>
+                        }
+                        else
+                        {
+                            <button @onclick="() => SetSplit(index)">[>]</button>
+                        }
+
+                        <button @onclick="() => ToggleEditMode(index)">[Edi]</button>
+                        <button @onclick="() => RemoveSplit(index)">[Del]</button>
+                    </td>
+                </tr>
+            }
+
+        }
+        <tr>
+            <td><button @onclick="AddSplit">[Add]</button></td>
+        </tr>
+    </tbody>
+</table>
+<br />
+<div class="yellow">@total.FormatActualTime()</div>
+<button @onclick="ToggleTimer">
+    @(aTimer.Enabled ? "Stop" : "Start")
+</button>
+<button @onclick="NextSplit">Split</button>
+<button @onclick="Reset">Reset</button>
+<br />
+<div>@total.FormattedEstimatedTime() -----@total.FormatDelta()</div>
+
+@code{
+    System.Timers.Timer aTimer = new System.Timers.Timer();
+
+    List<SplitItem> splits = new List<SplitItem>();
+    SplitItem total = new SplitItem();
+    int mainTimer = 0;
+    int splitIndex = 0;
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        splits.Add(new SplitItem() { Name = "Task 1", MinuteEstimated = 3 });
+        splits.Add(new SplitItem() { Name = "Task 2", MinuteEstimated = 5 });
+        splits.Add(new SplitItem() { Name = "Task 3", MinuteEstimated = 10 });
+
+        CalculateTotalEstimation();
+
+
+        aTimer = new System.Timers.Timer(100);
+        // Hook up the Elapsed event for the timer.
+        aTimer.Elapsed += OnTimedEvent;
+        aTimer.AutoReset = true;
+        aTimer.Enabled = false;
+    }
+
+    private void OnTimedEvent(Object source, ElapsedEventArgs e)
+    {
+        InvokeAsync(IncrementTime);
+    }
+
+    private void IncrementTime()
+    {
+        if (splits.Count == 0)
+        {
+            // all splits deleted, so stop timer and break
+            aTimer.Stop();
+            return;
+        }
+        mainTimer += 1;
+        if (mainTimer == 10)
+        {
+            total.Increment();
+            splits[splitIndex].Increment();
+            mainTimer = 0;
+
+        }
+
+        StateHasChanged();
+    }
+    private void Reset()
+    {
+        total.ResetSplit();
+        splits.ForEach(n => n.ResetSplit());
+    }
+    private void SetSplit(int i)
+    {
+        aTimer.Enabled = true;
+        splitIndex = i;
+    }
+    private void NextSplit()
+    {
+        aTimer.Enabled = true;
+        if (splitIndex < splits.Count)
+        {
+            splitIndex += 1;
+        }
+    }
+    private void ToggleTimer()
+    {
+        aTimer.Enabled = !aTimer.Enabled;
+    }
+    private void ToggleEditMode(int index)
+    {
+        splits[index].EditMode = !splits[index].EditMode;
+        splits[index].CleanEstimation();
+        CalculateTotalEstimation(); // update total estimations
+    }
+    private void AddSplit()
+    {
+        splits.Add(new SplitItem() { Name = $"Task{splits.Count.ToString()}", MinuteEstimated = 5 });
+        StateHasChanged();
+    }
+    private void RemoveSplit(int index)
+    {
+        if (index == splitIndex)
+        {
+            aTimer.Enabled = false;
+            splitIndex = 0;
+        }
+
+        splits.RemoveAt(index);
+    }
+    private void MoveUp(int index)
+    {
+        if (index != 0)
+        {
+            var item = splits[index];
+            splits.RemoveAt(index);
+            splits.Insert(index - 1, item);
+        }
+
+    }
+    private void MoveDown(int index)
+    {
+        if (index != (splits.Count - 1))
+        {
+            var item = splits[index];
+            splits.RemoveAt(index);
+            splits.Insert(index + 1, item);
+        }
+    }
+    private void CalculateTotalEstimation()
+    {
+        total.SecondEstimated = 0;
+        total.MinuteEstimated = 0;
+        total.HourEstimated = 0;
+        foreach (var item in splits)
+        {
+            total.SecondEstimated += item.SecondEstimated;
+            total.MinuteEstimated += item.MinuteEstimated;
+            total.HourEstimated += item.HourEstimated;
+        }
+
+        total.CleanEstimation();
+    }
+}
