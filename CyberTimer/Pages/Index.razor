@@ -2,74 +2,91 @@
 @using CyberTimer.Data;
 
 @page "/"
+<div class="container">
+    <div class="box--outer">
+        <div class="box">
+            <div class="box--inner">
+                <div class="content">
+                    <div class="holder">
+                        <table class="table centertable">
+                            <thead>
+                                <tr>
+                                    <th class="cyberred">-</th>
+                                    <th class="widthcol">Nam</th>
+                                    <th class="widthcol">Act</th>
+                                    <th class="widthcol">Δ</th>
+                                    <th class="widthcol">Est</th>
+                                    <th class="cyberred">-</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < splits.Count; i++)
+                                {
+                                    int index = i;
+                                    if (splits[index].EditMode)
+                                    {
+                                        <tr>
+                                            <td class="smallfont">
+                                                <button class="smallyellowbutton" @onclick="()=>MoveUp(index)">[▲]</button><button class="smallyellowbutton" @onclick="()=>MoveDown(index)">[▼]</button>
+                                             </td>
+                                            <td class="widthcol">
+                                                <input class="inputname" type="text" @bind-value="splits[index].Name" />
+                                            </td>
+                                            <td class="widthcol">@splits[index].FormatActualTime()</td>
+                                            <td class="widthcol">-</td>
+                                            <td class="widthcol"><input class="inputname" type="number" min="0" step="1" @bind-value="splits[index].HourEstimated" />:<input class="inputname" type="number" min="0" max="59" step="1" @bind-value="splits[index].MinuteEstimated" />:<input class="inputname" type="number" min="0" step="1" max="59" @bind-value="splits[index].SecondEstimated" /></td>
+                                            <td class="widthcol">
+                                                <button class="smallyellowbutton" @onclick="() => RemoveSplit(index)">[Del]</button><button class="smallyellowbutton" @onclick="() => ToggleEditMode(index)">[Sav]</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td class="smallfont">
+                                                <button class="smallyellowbutton" @onclick="()=>MoveUp(index)">[▲]</button><button class="smallyellowbutton" @onclick="()=>MoveDown(index)">[▼]</button>
+                                            </td>
+                                            <td class="widthcol">@splits[index].Name</td>
+                                            <td class="widthcol">@splits[index].FormatActualTime()</td>
+                                            <td class="@(splits[index].DeltaSign ? "deltagreen":"deltared" +" widthcol") " > @splits[index].FormatDelta()</td>
+                                            <td class="widthcol">@splits[index].FormattedEstimatedTime()</td>
+                                            <td>
+                                                @if (index == splitIndex && aTimer.Enabled)
+                                                {
+                                                    <button class="smallgreenbutton" @onclick="ToggleTimer">[Pau]</button> 
+                                                }
+                                                else
+                                                {
+                                                    <button class="smallgreenbutton" @onclick="() => SetSplit(index)">[Sta]</button> 
+                                                }
+                                                
+                                                <button class="smallyellowbutton" @onclick="() => ToggleEditMode(index)">[Edi]</button><button class="smallredbutton" @onclick="() => RemoveSplit(index)">[Del]</button>
+                                            </td>
+                                        </tr>
+                                    }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nam</th>
-            <th>Est</th>
-            <th>Act</th>
-            <th>Δ</th>
-            <th>-</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (int i = 0; i < splits.Count; i++)
-        {
-            int index = i;
-            if (splits[index].EditMode)
-            {
-                <tr>
-                    <td>
-                        <button @onclick="()=>MoveUp(index)">[▲]</button>
-                        <button @onclick="()=>MoveDown(index)">[▼]</button>
-                        <input type="text" @bind-value="splits[index].Name" />
-                    </td>
-                    <td><input type="number" min="0" step="1" @bind-value="splits[index].HourEstimated" />:<input type="number" min="0" max="59" step="1" @bind-value="splits[index].MinuteEstimated" />:<input type="number" min="0" step="1" max="59" @bind-value="splits[index].SecondEstimated" /></td>
-                    <td>@splits[index].FormatActualTime()</td>
-                    <td>-</td>
-                    <td><button @onclick="() => RemoveSplit(index)">[Del]</button><button @onclick="() => ToggleEditMode(index)">[Sav]</button></td>
-                </tr>
-            }
-            else
-            {
-                <tr>
-                    <td>@splits[index].Name</td>
-                    <td>@splits[index].FormattedEstimatedTime()</td>
-                    <td>@splits[index].FormatActualTime()</td>
-                    <td>@splits[index].FormatDelta()</td>
-                    <td>
-                        @if (index == splitIndex && aTimer.Enabled)
-                        {
-                            <button @onclick="ToggleTimer">[II]</button>
-                        }
-                        else
-                        {
-                            <button @onclick="() => SetSplit(index)">[>]</button>
-                        }
+                                }
+                                <tr>
+                                    <td><button class="smallgreenbutton" @onclick="AddSplit">[Add]</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                        <div class="yellow">@(total.HourElapse + total.MinuteElapse + total.SecondElapse !=0 ? total.FormatActualTime() : "00:00")</div>
+                        <button class="redbutton" @onclick="ToggleTimer">
+                            @(aTimer.Enabled ? "Stop" : "Start")
+                        </button>
+                        <button class="redbutton" @onclick="NextSplit">Split</button>
+                        <button class="redbutton" @onclick="Reset">Reset</button>
+                        <br />
+                        <div>@total.FormattedEstimatedTime() -----@total.FormatDelta()</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                        <button @onclick="() => ToggleEditMode(index)">[Edi]</button>
-                        <button @onclick="() => RemoveSplit(index)">[Del]</button>
-                    </td>
-                </tr>
-            }
-
-        }
-        <tr>
-            <td><button @onclick="AddSplit">[Add]</button></td>
-        </tr>
-    </tbody>
-</table>
-<br />
-<div class="yellow">@total.FormatActualTime()</div>
-<button @onclick="ToggleTimer">
-    @(aTimer.Enabled ? "Stop" : "Start")
-</button>
-<button @onclick="NextSplit">Split</button>
-<button @onclick="Reset">Reset</button>
-<br />
-<div>@total.FormattedEstimatedTime() -----@total.FormatDelta()</div>
-
+</div>
 @code{
     System.Timers.Timer aTimer = new System.Timers.Timer();
 
@@ -149,7 +166,7 @@
     }
     private void AddSplit()
     {
-        splits.Add(new SplitItem() { Name = $"Task{splits.Count.ToString()}", MinuteEstimated = 5 });
+        splits.Add(new SplitItem() { Name = $"Task {(splits.Count + 1).ToString()}", MinuteEstimated = 5 });
         StateHasChanged();
     }
     private void RemoveSplit(int index)

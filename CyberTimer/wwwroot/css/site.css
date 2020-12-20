@@ -10,12 +10,181 @@
 html, body {
     font-family: 'Share Tech Mono',monospace, Arial, sans-serif;
     color: #05d9e8;
-    font-size: 26px;
+    font-size: 16px;
     font-weight: 300;
     text-shadow: 0 0 100px rgba(14, 210, 219, .9);
     background: url('../assets/bg.png') #000;
     position: relative;
     height: 100vh
+}
+
+.container {
+    left: 0;
+    right: 0;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}
+
+.box--outer {
+    position: relative;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1080px;
+    border-top: #000 18px solid;
+    border-bottom: #000 18px solid;
+}
+
+.box {
+    display: inline-block;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    max-width: 1080px;
+}
+
+.box--inner {
+    display: inline-block;
+    width: calc(100% - 105px);
+    max-width: 1010px;
+}
+
+.content {
+    position: relative;
+    display: block;
+    max-height: 600px;
+    min-height: 400px;
+    height: 100%;
+}
+
+    .content .holder {
+        left: 0;
+        right: 0;
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+    }
+
+.redbutton {
+    border: none;
+    padding: 10px 40px;
+    width: auto;
+    overflow: visible;
+    outline: 0;
+    cursor: pointer;
+    background: 0 0;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+    background: #ff2a6d2e;
+    text-transform: uppercase;
+}
+
+.smallfont {
+    font-size: 5px;
+}
+
+.smallyellowbutton {
+    height: 22.5px;
+    width: 41px;
+    color: #ffe000;
+    border: none;
+    padding: 4px;
+    margin: 0px;
+    /* width: auto; */
+    /* overflow: visible; */
+    /* outline: 0; */
+    cursor: pointer;
+    background: 0 0;
+    /* color: inherit; */
+    font: inherit;
+    font-size: 12px;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+    background: #ffdf0059;
+    text-transform: uppercase;
+}
+.smallgreenbutton {
+    height: 22.5px;
+    width: 41px;
+    color: #0bff00;
+    border: none;
+    padding: 4px;
+    margin: 0px;
+    /* width: auto; */
+    /* overflow: visible; */
+    /* outline: 0; */
+    cursor: pointer;
+    background: 0 0;
+    /* color: inherit; */
+    font: inherit;
+    font-size: 12px;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+    background: #0bff0045;
+    text-transform: uppercase;
+}
+.smallredbutton {
+    height: 22.5px;
+    width: 41px;
+    color: #ff2a6d;
+    border: none;
+    padding: 4px;
+    margin: 0px;
+    /* width: auto; */
+    /* overflow: visible; */
+    /* outline: 0; */
+    cursor: pointer;
+    background: 0 0;
+    /* color: inherit; */
+    font: inherit;
+    font-size: 12px;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+    background: #ff2a6d2e;
+    text-transform: uppercase;
+}
+.widthcol{
+    width:80px;
+    max-width:80px;
+}
+.centertable {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.deltared {
+    color: #ff2a6d
+}
+
+.deltagreen {
+    color: #0bff00;
+}
+
+.inputname {
+    border: 2px solid #FFE000;
+    /* margin: 10px 0; */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: auto;
+    max-width: 100%;
+    overflow: visible;
+    outline: 0;
+    background: 0 0;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
 }
 
 .yellow {
@@ -25,10 +194,14 @@ html, body {
     font-size: 44px;
 }
 
-table, thd, td {
+table {
     border: 1px solid #ff2a6d;
     /*border-color:#ff2a6d;
     border-collapse: collapse;*/
+}
+
+.cyberred {
+    color: #ff2a6d;
 }
 
 
@@ -44,9 +217,9 @@ table, thd, td {
     z-index: 1000;
 }
 
-#blazor-error-ui .dismiss {
-    cursor: pointer;
-    position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
-}
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }

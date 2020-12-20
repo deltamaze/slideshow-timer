@@ -99,7 +99,19 @@ namespace CyberTimer.Data
             // else if hours is 0, don't render hour
             // else if minute is 0 don't render 
             // else render all
-            return $"{hour.ToString()}:{min.ToString().PadLeft(2, '0')}:{sec.ToString().PadLeft(2, '0')}";
+            if (hour != 0)
+            {
+                return $"{hour.ToString()}:{min.ToString().PadLeft(2, '0')}:{sec.ToString().PadLeft(2, '0')}";
+            }
+            if (min != 0 || sec!=0)
+            {
+                return $"{min.ToString()}:{sec.ToString().PadLeft(2, '0')}";
+            }
+            //if (sec != 0)
+            //{
+            //    return $"{sec.ToString()}";
+            //}
+            return "";
         }
 
     }
