@@ -188,6 +188,7 @@
     {
         splits[index].EditMode = !splits[index].EditMode;
         splits[index].CleanEstimation();
+        splits[index].UpdateDelta();
         CalculateTotalEstimation(); // update total estimations
     }
     private void AddSplit()

@@ -78,7 +78,7 @@ namespace CyberTimer.Data
             SecondEstimated = seconds - (MinuteEstimated * 60);// take out the seconds that account for the deltaMinute
 
         }
-        private void UpdateDelta()
+        public void UpdateDelta()
         {
             // convert everything to seconds
             int estTotalSeconds = (HourEstimated * 60 * 60) + (MinuteEstimated * 60) + SecondEstimated;
