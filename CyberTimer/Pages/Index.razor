@@ -39,7 +39,6 @@
                                             <td>
                                                 @if (index == splitIndex && aTimer.Enabled)
                                                 {
-                                                    <button class="smallgreenbutton" @onclick="ToggleTimer">[Pau]</button>
                                                 }
                                                 else
                                                 {
@@ -194,6 +193,7 @@
     private void AddSplit()
     {
         splits.Add(new SplitItem() { Name = $"Task {(splits.Count + 1).ToString()}", MinuteEstimated = 5 });
+        CalculateTotalEstimation(); // update total estimations
         StateHasChanged();
     }
     private void RemoveSplit(int index)
