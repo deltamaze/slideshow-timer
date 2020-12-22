@@ -15,7 +15,7 @@
                                     <th class="widthcol">Nam</th>
                                     <th class="widthcol">Act</th>
                                     <th class="widthcol">Δ</th>
-                                    <th class="widthcol">Est</th>
+                                    <th class="widthcollong">Est</th>
                                     <th class="cyberred">-</th>
                                 </tr>
                             </thead>
@@ -23,63 +23,80 @@
                                 @for (int i = 0; i < splits.Count; i++)
                                 {
                                     int index = i;
-                                    if (splits[index].EditMode)
-                                    {
-                                        <tr>
+                                    string selectedCss = index == splitIndex && aTimer.Enabled ? " selected " : "";
+                                    <tr class="@(selectedCss)">
+                                        @if (splits[index].EditMode)
+                                        {
                                             <td class="smallfont">
                                                 <button class="smallyellowbutton" @onclick="()=>MoveUp(index)">[▲]</button><button class="smallyellowbutton" @onclick="()=>MoveDown(index)">[▼]</button>
-                                             </td>
+                                            </td>
                                             <td class="widthcol">
                                                 <input class="inputname" type="text" @bind-value="splits[index].Name" />
                                             </td>
                                             <td class="widthcol">@splits[index].FormatActualTime()</td>
-                                            <td class="widthcol">-</td>
-                                            <td class="widthcol"><input class="inputname" type="number" min="0" step="1" @bind-value="splits[index].HourEstimated" />:<input class="inputname" type="number" min="0" max="59" step="1" @bind-value="splits[index].MinuteEstimated" />:<input class="inputname" type="number" min="0" step="1" max="59" @bind-value="splits[index].SecondEstimated" /></td>
-                                            <td class="widthcol">
-                                                <button class="smallyellowbutton" @onclick="() => RemoveSplit(index)">[Del]</button><button class="smallyellowbutton" @onclick="() => ToggleEditMode(index)">[Sav]</button>
+                                            <td class="@(splits[index].DeltaSign ? "deltagreen":"deltared" +" widthcol") "> @splits[index].FormatDelta()</td>
+                                            <td class="widthcollong"><input class="inputnum" type="number" min="0" step="1" @bind-value="splits[index].MinuteEstimated" />:<input class="inputnum" type="number" min="0" step="1" @bind-value="splits[index].SecondEstimated" /></td>
+                                            <td>
+                                                @if (index == splitIndex && aTimer.Enabled)
+                                                {
+                                                    <button class="smallgreenbutton" @onclick="ToggleTimer">[Pau]</button>
+                                                }
+                                                else
+                                                {
+                                                    <button class="smallgreenbutton" @onclick="() => SetSplit(index)">[Sta]</button>
+                                                }
+
+                                                <button class="smallyellowbutton" @onclick="() => ToggleEditMode(index)">[Sav]</button><button class="smallredbutton" @onclick="() => RemoveSplit(index)">[Del]</button>
                                             </td>
-                                        </tr>
-                                    }
-                                    else
-                                    {
-                                        <tr>
+
+                                        }
+                                        else
+                                        {
                                             <td class="smallfont">
                                                 <button class="smallyellowbutton" @onclick="()=>MoveUp(index)">[▲]</button><button class="smallyellowbutton" @onclick="()=>MoveDown(index)">[▼]</button>
                                             </td>
                                             <td class="widthcol">@splits[index].Name</td>
                                             <td class="widthcol">@splits[index].FormatActualTime()</td>
-                                            <td class="@(splits[index].DeltaSign ? "deltagreen":"deltared" +" widthcol") " > @splits[index].FormatDelta()</td>
-                                            <td class="widthcol">@splits[index].FormattedEstimatedTime()</td>
+                                            <td class="@(splits[index].DeltaSign ? "deltagreen":"deltared" +" widthcol") "> @splits[index].FormatDelta()</td>
+                                            <td class="widthcollong">@splits[index].FormattedEstimatedTime()</td>
                                             <td>
                                                 @if (index == splitIndex && aTimer.Enabled)
                                                 {
-                                                    <button class="smallgreenbutton" @onclick="ToggleTimer">[Pau]</button> 
+                                                    <button class="smallgreenbutton" @onclick="ToggleTimer">[Pau]</button>
                                                 }
                                                 else
                                                 {
-                                                    <button class="smallgreenbutton" @onclick="() => SetSplit(index)">[Sta]</button> 
+                                                    <button class="smallgreenbutton" @onclick="() => SetSplit(index)">[Sta]</button>
                                                 }
-                                                
+
                                                 <button class="smallyellowbutton" @onclick="() => ToggleEditMode(index)">[Edi]</button><button class="smallredbutton" @onclick="() => RemoveSplit(index)">[Del]</button>
                                             </td>
-                                        </tr>
-                                    }
-
+                                        }
+                                    </tr>
                                 }
                                 <tr>
                                     <td><button class="smallgreenbutton" @onclick="AddSplit">[Add]</button></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>
                         <br />
-                        <div class="yellow">@(total.HourElapse + total.MinuteElapse + total.SecondElapse !=0 ? total.FormatActualTime() : "00:00")</div>
+                        <div class="glitch" data-text="@(total.HourElapse + total.MinuteElapse + total.SecondElapse !=0 ? total.FormatActualTime() : "00:00")">@(total.HourElapse + total.MinuteElapse + total.SecondElapse !=0 ? total.FormatActualTime() : "00:00")</div>
                         <button class="redbutton" @onclick="ToggleTimer">
                             @(aTimer.Enabled ? "Stop" : "Start")
                         </button>
                         <button class="redbutton" @onclick="NextSplit">Split</button>
                         <button class="redbutton" @onclick="Reset">Reset</button>
                         <br />
-                        <div>@total.FormattedEstimatedTime() -----@total.FormatDelta()</div>
+                        <div class="cyberred">
+                            <br />
+                            <span>Total Estimated: @total.FormattedEstimatedTime()</span><br />
+                            <span>Total Delta: <span class="@(total.DeltaSign ? "deltagreen":"deltared" +" widthcol") "> @total.FormatDelta()</span></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -138,6 +155,8 @@
     }
     private void Reset()
     {
+        aTimer.Stop();
+        splitIndex = 0;
         total.ResetSplit();
         splits.ForEach(n => n.ResetSplit());
     }
@@ -148,8 +167,11 @@
     }
     private void NextSplit()
     {
-        aTimer.Enabled = true;
-        if (splitIndex < splits.Count)
+        if (!aTimer.Enabled)
+        {
+            aTimer.Enabled = true;
+        }
+        else if (splitIndex+1 < splits.Count)
         {
             splitIndex += 1;
         }
@@ -157,6 +179,11 @@
     private void ToggleTimer()
     {
         aTimer.Enabled = !aTimer.Enabled;
+        if (!aTimer.Enabled)
+        {
+            //timer swapped off, so set index back to 0
+            splitIndex = 0;
+        }
     }
     private void ToggleEditMode(int index)
     {
@@ -176,6 +203,10 @@
             aTimer.Enabled = false;
             splitIndex = 0;
         }
+        else if(index < splitIndex)
+        {
+            splitIndex -= 1;
+        }
 
         splits.RemoveAt(index);
     }
@@ -186,7 +217,16 @@
             var item = splits[index];
             splits.RemoveAt(index);
             splits.Insert(index - 1, item);
+            if (index == splitIndex)
+            {
+                splitIndex -= 1;
+            }
+            else if (index - 1 == splitIndex) //if it movedinto the selected spot, then swap
+            {
+                splitIndex += 1;
+            }
         }
+
 
     }
     private void MoveDown(int index)
@@ -196,6 +236,15 @@
             var item = splits[index];
             splits.RemoveAt(index);
             splits.Insert(index + 1, item);
+            if (index == splitIndex ) //if it's the currently selected, move selected with it
+            {
+                splitIndex += 1;
+            }
+            else if (index+1 == splitIndex) //if it movedinto the selected spot, then swap
+            {
+                splitIndex -= 1;
+            }
+
         }
     }
     private void CalculateTotalEstimation()

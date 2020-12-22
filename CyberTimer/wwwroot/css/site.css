@@ -70,7 +70,7 @@ html, body {
 .redbutton {
     border: none;
     padding: 10px 40px;
-    width: auto;
+    width: 123px;
     overflow: visible;
     outline: 0;
     cursor: pointer;
@@ -159,7 +159,12 @@ html, body {
     width:80px;
     max-width:80px;
 }
+.widthcollong {
+    width: 88px;
+    max-width: 88px;
+}
 .centertable {
+    box-shadow: 0 0 5px #ff2a6d, inset 0 0 5px #ff2a6d;
     margin-left: auto;
     margin-right: auto;
 }
@@ -175,31 +180,70 @@ html, body {
 .inputname {
     border: 2px solid #FFE000;
     /* margin: 10px 0; */
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: auto;
+    /* padding-top: 10px; */
+    /* padding-bottom: 10px; */
+    /* width: auto; */
     max-width: 100%;
-    overflow: visible;
-    outline: 0;
+    /* overflow: visible; */
+    /* outline: 0; */
     background: 0 0;
     color: inherit;
+    /* font: inherit; */
+    /* line-height: normal; */
+    padding: 0px;
+    text-rendering: initial;
+    letter-spacing: inherit;
+    word-spacing: inherit;
+    text-transform: none;
+    text-indent: inherit;
+    text-shadow: inherit;
+    display: inherit;
+    text-align: inherit;
+    margin: inherit;
     font: inherit;
-    line-height: normal;
+}
+.inputnum {
+    border: 2px solid #FFE000;
+    /* margin: 10px 0; */
+    /* padding-top: 10px; */
+    /* padding-bottom: 10px; */
+    /* width: auto; */
+    max-width: 35px;
+    /* overflow: visible; */
+    /* outline: 0; */
+    background: 0 0;
+    color: inherit;
+    /* font: inherit; */
+    /* line-height: normal; */
+    padding: 0px;
+    text-rendering: initial;
+    letter-spacing: inherit;
+    word-spacing: inherit;
+    text-transform: none;
+    text-indent: inherit;
+    text-shadow: inherit;
+    display: inherit;
+    text-align: inherit;
+    margin: inherit;
+    font: inherit;
 }
 
-.yellow {
-    text-shadow: 0 0 20px #b6c81e82;
-    color: yellow;
-    font-weight: bold;
-    font-size: 44px;
-}
 
 table {
     border: 1px solid #ff2a6d;
-    /*border-color:#ff2a6d;
-    border-collapse: collapse;*/
+    border-collapse: collapse;
+    
 }
-
+tr {
+    border: none;
+}
+.selected {
+    border-bottom: solid;
+    border-top: solid;
+    border-width: 1px 0;
+    border-color: #0bff00;
+    box-shadow: 0 0 5px #0bff00, inset 0 0 5px #0bff00;
+}
 .cyberred {
     color: #ff2a6d;
 }
@@ -223,3 +267,207 @@ table {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+
+
+/*GLITCH CSS :https://css-tricks.com/glitch-effect-text-images-svg/ */
+.glitch {
+    color: yellow;
+    font-size: 100px;
+    position: relative;
+    width: 400px;
+    margin: 0 auto;
+}
+
+@keyframes noise-anim {
+    0% {
+        clip-path: inset(84% 0 5% 0);
+    }
+
+    5% {
+        clip-path: inset(99% 0 1% 0);
+    }
+
+    10% {
+        clip-path: inset(14% 0 86% 0);
+    }
+
+    15% {
+        clip-path: inset(71% 0 16% 0);
+    }
+
+    20% {
+        clip-path: inset(82% 0 8% 0);
+    }
+
+    25% {
+        clip-path: inset(19% 0 66% 0);
+    }
+
+    30% {
+        clip-path: inset(59% 0 16% 0);
+    }
+
+    35% {
+        clip-path: inset(61% 0 17% 0);
+    }
+
+    40% {
+        clip-path: inset(34% 0 3% 0);
+    }
+
+    45% {
+        clip-path: inset(68% 0 30% 0);
+    }
+
+    50% {
+        clip-path: inset(7% 0 46% 0);
+    }
+
+    55% {
+        clip-path: inset(51% 0 40% 0);
+    }
+
+    60% {
+        clip-path: inset(36% 0 48% 0);
+    }
+
+    65% {
+        clip-path: inset(18% 0 16% 0);
+    }
+
+    70% {
+        clip-path: inset(77% 0 1% 0);
+    }
+
+    75% {
+        clip-path: inset(5% 0 12% 0);
+    }
+
+    80% {
+        clip-path: inset(16% 0 78% 0);
+    }
+
+    85% {
+        clip-path: inset(64% 0 12% 0);
+    }
+
+    90% {
+        clip-path: inset(54% 0 23% 0);
+    }
+
+    95% {
+        clip-path: inset(10% 0 66% 0);
+    }
+
+    100% {
+        clip-path: inset(37% 0 41% 0);
+    }
+}
+
+/*.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    text-shadow: -1px 0 #ff2a6d;
+    top: 0;
+    color: yellow;*/
+    /* background: black; */
+    /*overflow: hidden;
+    animation: noise-anim-2 15s infinite linear alternate-reverse;
+}*/
+
+@keyframes noise-anim-2 {
+    0% {
+        clip-path: inset(53% 0 8% 0);
+    }
+
+    5% {
+        clip-path: inset(86% 0 14% 0);
+    }
+
+    10% {
+        clip-path: inset(84% 0 11% 0);
+    }
+
+    15% {
+        clip-path: inset(5% 0 89% 0);
+    }
+
+    20% {
+        clip-path: inset(57% 0 27% 0);
+    }
+
+    25% {
+        clip-path: inset(19% 0 60% 0);
+    }
+
+    30% {
+        clip-path: inset(27% 0 3% 0);
+    }
+
+    35% {
+        clip-path: inset(81% 0 14% 0);
+    }
+
+    40% {
+        clip-path: inset(30% 0 47% 0);
+    }
+
+    45% {
+        clip-path: inset(100% 0 1% 0);
+    }
+
+    50% {
+        clip-path: inset(75% 0 25% 0);
+    }
+
+    55% {
+        clip-path: inset(87% 0 12% 0);
+    }
+
+    60% {
+        clip-path: inset(61% 0 1% 0);
+    }
+
+    65% {
+        clip-path: inset(28% 0 48% 0);
+    }
+
+    70% {
+        clip-path: inset(9% 0 88% 0);
+    }
+
+    75% {
+        clip-path: inset(4% 0 9% 0);
+    }
+
+    80% {
+        clip-path: inset(60% 0 21% 0);
+    }
+
+    85% {
+        clip-path: inset(69% 0 7% 0);
+    }
+
+    90% {
+        clip-path: inset(25% 0 11% 0);
+    }
+
+    95% {
+        clip-path: inset(30% 0 22% 0);
+    }
+
+    100% {
+        clip-path: inset(40% 0 17% 0);
+    }
+}
+
+.glitch::before {
+    content: attr(data-text);
+    position: absolute;
+    text-shadow: 1px 0 #05d9e8, -1px 0 #ff2a6d;
+    top: 0;
+    color: yellow;
+    overflow: hidden;
+    animation: noise-anim 15s infinite linear alternate-reverse;
+}
